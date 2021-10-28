@@ -1,0 +1,14 @@
+# Adds 1 to a binary number.
+input: '' # 11(dec)
+blank: ' '
+start state: wypisz_w
+table:
+  wypisz_w:
+    ' ': {write: 'W', R: wypisz_i}
+  wypisz_i:
+    ' ': {write: 'I', R: wypisz_t}
+  wypisz_t:
+    ' ': {write: 'T', R: done}
+  wypisz_a:
+    ' ': {write: 'A', R: done}
+  done:
