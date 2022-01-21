@@ -39,4 +39,17 @@ int main() {
     }
 
     printf("\n");
+
+    int length2 = 100000;
+    int arr2[100000];
+
+    for (int i = 99999; i >= 0; i--) {
+        arr2[100000 - i] = i;
+    }
+
+    quick_sort(arr2, 0, length2);
+
+    for (int i = 0; i < length2; i++) {
+        printf("%i ", arr2[i]);
+    }
 }
