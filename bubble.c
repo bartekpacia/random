@@ -13,10 +13,21 @@ void bubble_sort(int* array, int length) {
     }
 }
 
+void insert_sort(int* array, int length) {
+    int i, j;
+    for (i = 1; i < length; ++i) {
+        int value = array[i];
+        for (j = i - 1; j >= 0 && array[j] > array[i]; --j) {
+            array[j + 1] = array[j];
+        }
+        array[j + 1] = value;
+    }
+}
+
 int main() {
     int length = 9;
     int arr[] = {7, 4, 2, 6, 3, 1, 8, 9, 5};
-    bubble_sort(arr, length);
+    insert_sort(arr, length);
 
     for (int i = 0; i < length; i++) {
         printf("%i ", arr[i]);
