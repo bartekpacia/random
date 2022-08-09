@@ -8,7 +8,9 @@ int main(int argc, const char * argv[]) {
 
         [PTUSBHub sharedHub];
 
-        Delegate *delegate = [Delegate new];
+        Delegate *delegate = [[Delegate alloc] init];
         [delegate doSomething:@"Hello, World!"];
+
+        PTChannel *channel = [PTChannel channelWithDelegate:delegate];
     }
 }
