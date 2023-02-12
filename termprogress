@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-for ($i=0 ; $i<=100 ; $i++) {
-  echo "Progress: $i %   \r";
-  sleep(1);
-}
+for i in {1..100}; do
+  printf "Progress: %i   \r" "$i"
+  sleep 1
+done
