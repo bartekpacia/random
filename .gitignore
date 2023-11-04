@@ -1,6 +1,2 @@
 .DS_Store
 a.out
-*.out.dSYM
-main
-main.o
-peertalk
