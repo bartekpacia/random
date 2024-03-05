@@ -8,6 +8,8 @@ import (
 	"go.starlark.net/syntax"
 )
 
+var commands []map[string]string
+
 func main() {
 	thread := &starlark.Thread{Name: "main"}
 
