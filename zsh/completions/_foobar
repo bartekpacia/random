@@ -1,0 +1,17 @@
+#compdef foobar
+
+_foobar() {
+    local -a commands
+    commands=(
+        "run:Boot AVD"
+        "list:List all AVDs"
+        "ls:List all AVDs"
+        "l:List all AVDs"
+        "theme:Switch between light and dark mode"
+        "displaysize:Make everything bigger or smaller"
+    )
+
+    _describe 'values' commands
+}
+
+_foobar
