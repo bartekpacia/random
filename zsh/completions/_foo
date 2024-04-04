@@ -1,0 +1,24 @@
+#compdef foo
+compdef _foo foo
+
+# _describe
+#
+# The _describe function can be used for simple completions where the order and
+# position of the options/arguments is not important.
+#
+# Learn more:
+# https://github.com/zsh-users/zsh-completions/blob/0.35.0/zsh-completions-howto.org#writing-simple-completion-functions-using-_describe
+
+_foo() {
+	local -a commands
+	commands=(
+		"run:Boot AVD"
+		"list:List all AVDs"
+		"ls:List all AVDs"
+		"l:List all AVDs"
+		"theme:Switch between light and dark mode"
+		"displaysize:Make everything bigger or smaller"
+	)
+
+	_describe 'values' commands
+}

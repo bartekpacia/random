@@ -8,21 +8,19 @@ set -euo pipefail
 # "theme:Switch between light and dark mode"
 # "displaysize:Make everything bigger or smaller"
 
-
 cmd="${1:-}"
 
 case "$cmd" in
-    run)
-        echo "run called"
-        ;;
-    list|ls)
-        echo "list called"
-        ;;
-    theme)
-        echo "theme called"
-        ;;
-    displaysize)
-        echo "displaysize called"
-        ;;
+run)
+	echo "run called"
+	;;
+list | ls)
+	echo "list called"
+	;;
+theme)
+	echo "theme called"
+	;;
+displaysize)
+	echo "displaysize called"
+	;;
 esac
-

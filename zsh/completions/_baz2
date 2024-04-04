@@ -1,0 +1,19 @@
+#compdef baz2
+compdef _baz2 baz2
+
+# _arguments
+#
+# With a single call to the _arguments function you can create fairly
+# sophisticated completion functions.
+#
+# Learn more:
+# https://github.com/zsh-users/zsh-completions/blob/0.35.0/zsh-completions-howto.org#writing-completion-functions-using-_arguments
+
+_baz2() {
+	_arguments \
+		'--long[long output]' \
+	 	'-s[sort output]' \
+		'-f[input file]:filename:_files' \
+		'1:first arg:(alpha bravo)' \
+		'2:second arg:(charlie delta)'
+}

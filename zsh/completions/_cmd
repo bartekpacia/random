@@ -1,0 +1,14 @@
+#compdef cmd
+compdef _cmd cmd
+
+# cmd build <Runner|RunnerTests|RunnerUITests>
+# cmd run --device <Barteks-iPhone|emulator-5554> --flavor <debug|release>
+
+_cmd() {
+    local -a subcmds
+    subcmds=(
+        'run:Run app on device'
+        'build:Build a particular target'
+        )
+    _describe 'command' subcmds
+}

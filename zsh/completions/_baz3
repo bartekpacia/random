@@ -1,0 +1,27 @@
+#compdef baz3
+compdef _baz3 baz3
+
+# _arguments
+#
+# With a single call to the _arguments function you can create fairly
+# sophisticated completion functions.
+#
+# Learn more:
+# https://github.com/zsh-users/zsh-completions/blob/0.35.0/zsh-completions-howto.org#writing-completion-functions-using-_arguments
+
+_baz3() {
+	_arguments \
+        '-d[document file]:filename:->documents' \
+        '-f[flags]:flag:->flags'
+
+	case "$state" in
+	documents)
+		local -a document_files
+		document_files=(~/Documents/**/*.{md,pdf})
+		_values $document_files
+		;;
+	flags)
+		_values -s , 'flags' a b c d e
+		;;
+	esac
+}

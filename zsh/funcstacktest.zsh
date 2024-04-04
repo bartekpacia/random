@@ -3,7 +3,7 @@
 c() {
 	echo "${funcstack}"
 
-	for ((i=1; i<$#funcstack; i++)); do
+	for ((i = 1; i <= $#funcstack; i++)); do
 		echo "Index: $i, function: ${funcstack[$i]}"
 	done
 }
@@ -17,3 +17,5 @@ a() {
 }
 
 a
+
+echo "funcstack outside function: ${funcstack}"

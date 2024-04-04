@@ -1,0 +1,22 @@
+#compdef bar
+compdef _bar bar
+
+# _alternative
+#
+# Like _describe, this function performs simple completions where the order and
+# position of options/arguments is not important. However, unlike _describe,
+# instead of fixed matches further functions may be called to generate the
+# completion candidates. Furthermore, _alternative allows a mix of different
+# types of completion candidates to be mixed.
+#
+# Learn more:
+# https://github.com/zsh-users/zsh-completions/blob/0.35.0/zsh-completions-howto.org#writing-completion-functions-using-_alternative
+
+_bar() {
+    # Syntax:
+
+	_alternative \
+		'argument:custom arg:(alpha bravo charlie)' \
+        'args:custom arg:((a\:"description a" b\:"description b" c\:"description c"))' \
+		'users:user:_users'
+}
