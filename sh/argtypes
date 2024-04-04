@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+set -eu
+
+echo "Script 0th argument: ${0:-}"
+echo "Script 1st argument: ${1:-}"
+echo "Script 2nd argument: ${2:-}"
+echo "Script 3rd argument: ${3:-}"
+
+func() {
+	echo "Function 0th argument: ${0:-}"
+	echo "Function 1st argument: ${1:-}"
+	echo "Function 2nd argument: ${2:-}"
+	echo "Function 3rd argument: ${3:-}"
+}
+
+func "func_arg_1"
