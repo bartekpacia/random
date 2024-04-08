@@ -6,7 +6,6 @@ import (
 	"slices"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
 )
 
 func main() {
@@ -45,10 +44,7 @@ var runCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(runCmd)
 
-	runCmd.Flags().AddFlag(&pflag.Flag{
-		Name:  "device",
-		Usage: "Select device to run on",
-	})
+	runCmd.Flags().String("device", "", "Select device to run on")
 
 	runCmd.RegisterFlagCompletionFunc(
 		"device",
