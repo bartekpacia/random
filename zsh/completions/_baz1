@@ -10,5 +10,8 @@ compdef _baz1 baz1
 # https://github.com/zsh-users/zsh-completions/blob/0.35.0/zsh-completions-howto.org#writing-completion-functions-using-_arguments
 
 _baz1() {
-	_arguments '1:first arg:(alpha bravo)' '2:second arg:(charlie delta)'
+	_arguments \
+		'1:first arg:(alpha bravo)' \
+		'2:second arg:(charlie\ together delta\ together)' \
+		'3:third arg:(echo\ with\ colon: dupa)'
 }
