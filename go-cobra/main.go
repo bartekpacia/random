@@ -49,6 +49,8 @@ func init() {
 	runCmd.RegisterFlagCompletionFunc(
 		"device",
 		func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+			cobra.CompDebug(fmt.Sprintf("args: %v, toComplete: %s\n", args, toComplete), false)
+
 			return []string{"emulator-5554", "Barteks-iPhone"}, cobra.ShellCompDirectiveNoFileComp
 		},
 	)

@@ -7,5 +7,15 @@ public class Main {
 		for (int i = 0; i < nums.length; i++) {
 			System.out.println("number at index " + i + " is " + nums[i]);
 		}
+		Flubber.a();
 	}
+
+	
+}
+
+class Flubber {
+	@Deprecated
+		public static void a() {
+			
+		} 
 }
