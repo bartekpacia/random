@@ -18,19 +18,19 @@ int main() {
     if (omp_get_dynamic()) {
         printf("Warning: dynamic adjustment of threads has been set\n");
     }
-    (void)omp_set_num_threads(4);
+    // (void)omp_set_num_threads(16);
 #endif
 
-    for (int n = 5; n < 11; n += 5) {
-#pragma omp parallel if (n > 5) num_threads(n) default(none) private(TID) \
-    shared(n)
+    printf("Will run using %d threads\n", omp_get_num_threads());
+
+    for (int n = 0; n < 10; n++) {
+        #pragma omp parallel default(none) private(TID) shared(n) 
         {
             TID = omp_get_thread_num();
-#pragma omp single
+            #pragma omp single
             {
                 printf("Value of n = %d\n", n);
-                printf("Number of threads in parallel region: %d\n",
-                       omp_get_num_threads());
+                printf("Number of threads in parallel region: %d\n", omp_get_num_threads());
             }
             printf("Print statement executed by thread %d\n", TID);
         } /*-- End of parallel region --*/
