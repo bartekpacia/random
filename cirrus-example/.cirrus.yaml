@@ -1,0 +1,19 @@
+task:
+  name: build
+  container:
+    image: alpine:3.20
+  script: |
+    echo "Hello from build task on $(uname -a)"
+  script: |
+    echo "hello world" > file.txt
+  example_artifacts:
+    path: file.txt
+
+task:
+  name: test
+  container:
+    image: alpine:3.19
+  depends_on:
+    - build
+  script: |
+    echo "Hello from test task on $(uname -a)"
