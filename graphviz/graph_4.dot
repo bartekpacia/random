@@ -1,0 +1,4 @@
+digraph X {
+    A -> B;
+    {B A} -> {B C A};
+}

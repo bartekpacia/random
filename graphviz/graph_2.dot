@@ -1,0 +1,11 @@
+digraph {
+    compile;
+    link;
+    test;
+    run;
+    
+    compile -> link;
+    compile -> test;
+    link -> run;
+    test -> run;
+}

@@ -1,0 +1,8 @@
+digraph G {
+    node [style = "dotted"; color = "red";];
+    edge [style = "dashed"; color = "blue";];
+    
+    A -> B [label = "A to B"; constraint = false;];
+    B -> C [label = "B to C";];
+    C -> D [label = "C to D"; constraint = true;];
+}
