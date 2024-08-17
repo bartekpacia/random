@@ -2,9 +2,12 @@ package main
 
 import (
 	"fmt"
+	"time"
 	"net/http"
 	"net/http/httputil"
 )
+
+const addr = "localhost:2137"
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -13,8 +16,11 @@ func main() {
 		fmt.Print(string(reqBytes))
 
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Hello, World!\n"))
+
+		data := fmt.Sprintln("Hello, World! Current time is", time.Now().Format(time.RFC850)) 
+		w.Write([]byte(data))
 	})
 
-	http.ListenAndServe("localhost:2137", nil)
+	fmt.Println("will listen on", addr)
+	http.ListenAndServe(addr, nil)
 }

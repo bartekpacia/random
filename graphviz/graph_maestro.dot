@@ -1,10 +1,15 @@
 digraph {
     TestCommand;
     
-    TestCommand -> TestRunner [xlabel = "single flow"; fontcolor = grey;];
+    TestCommand -> MaestroSessionManager [xlabel = "newSession";];
+    
+    MaestroSessionManager -> TestRunner [xlabel = "single flow"; fontcolor = grey;];
     TestRunner -> MaestroCommandRunner [xlabel = "runCommands()";];
     MaestroCommandRunner -> Orchestra [label = "runFlow()";];
     
-    TestCommand -> TestSuiteInteractor [label = "many flows"; fontcolor = grey;];
+    TestRunner [xlabel = "- runSingle()\n- runContinuous()";];
+    MaestroCommandRunner [xlabel = "- handles UI\n- creates Orchestra";];
+    
+    MaestroSessionManager -> TestSuiteInteractor [label = "many flows"; fontcolor = grey;];
     TestSuiteInteractor -> Orchestra [label = "runFlow()"; tooltip = "This edge connects node A to node B";];
 }
