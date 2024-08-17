@@ -1,0 +1,25 @@
+build_task:
+  container:
+    image: azul/zulu-openjdk-alpine:21-latest
+  create_file_script: |
+    cat >Main.java <<EOF
+    public class Main {
+      public static void main(String[] args) {
+        System.out.println("Hello, World!");
+      }
+    }
+    EOF
+  compile_script: javac --release 11 Main.java
+  binary_artifacts:
+    path: Main.class
+
+test_task:
+  name: test
+  container:
+    image: azul/zulu-openjdk-alpine:11-latest
+  depends_on:
+    - build
+  java_info_script: java --version
+  run_classfile_script: |
+    cd local_artifacts/build/binary
+    java Main
