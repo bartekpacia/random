@@ -15,6 +15,7 @@ func main() {
 	// renderer := renderers.NewSimpleRenderer(os.Stdout, nil)
 	renderer := renderers.NewInteractiveRenderer(os.Stdout, nil)
 	go renderer.StartDrawing()
+	go another()
 	defer renderer.StopDrawing()
 	log := echelon.NewLogger(echelon.InfoLevel, renderer)
 	generateNode(log, 10)
@@ -39,9 +40,20 @@ func generateNode(log *echelon.Logger, magicConstant int) {
 				time.Sleep(time.Second)
 				child.Infof("Doing very important jobs! Completed %d/100...", 100*(waitSecond+1)/subJobDuration)
 			}
-			child.Finish(true)
+			success := rand.Intn(2) == 0
+			child.Finish(success)
 		}
 	}
 	scoped.Debugf("Finished after %d iterations", magicConstant)
 	scoped.Finish(true)
+}
+
+func another() {
+	fmt.Println("\rAnother function 1")
+	time.Sleep(3 * time.Second)
+	fmt.Println("\rAnother function 2")
+	time.Sleep(3 * time.Second)
+	fmt.Println("\rAnother function 3")
+	time.Sleep(3 * time.Second)
+	fmt.Println("\rAnother function 4")
 }
