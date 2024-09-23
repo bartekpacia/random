@@ -17,3 +17,19 @@ task:
     - build
   script: |
     echo "Hello from test task on $(uname -a)"
+
+task:
+  name: matrixdemo
+  container:
+    image: alpine:3.20
+  env:
+    matrix:
+      OTHER_VAR: dupa
+      OTHER_VAR: cycki
+      OTHER_VAR: penis
+    matrix:  
+      MY_VAR: bar
+      MY_VAR: baz
+  print_script:
+    - echo "MY_VAR value is $MY_VAR"
+    - echo "OTHER_VAR value is $OTHER_VAR"
