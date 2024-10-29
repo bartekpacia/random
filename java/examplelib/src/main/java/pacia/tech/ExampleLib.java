@@ -8,6 +8,7 @@ public class ExampleLib {
         result += firstIncrement;
         int secondIncrement = 5;
         result += secondIncrement;
+        assert(firstIncrement + secondIncrement == 10);
         return result;
     }
 }
