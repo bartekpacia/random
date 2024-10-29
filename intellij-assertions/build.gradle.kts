@@ -24,6 +24,9 @@ dependencies {
 
     testImplementation(kotlin("test"))
     implementation(kotlin("stdlib-jdk8"))
+
+    // Sample lib
+    implementation(files("../java/examplelib/build/libs/examplelib-1.0.0.jar"))
 }
 
 tasks.test {
