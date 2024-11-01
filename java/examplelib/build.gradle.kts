@@ -15,7 +15,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation(kotlin("stdlib-jdk8"))
 
-    testImplementation("junit:junit:4.13")
+    implementation("org.jetbrains:annotations:26.0.1")
+
+    testImplementation("junit:junit:4.13.1")
 }
 
 tasks.test {
