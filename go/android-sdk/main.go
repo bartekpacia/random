@@ -8,6 +8,8 @@ import (
 	"net/http"
 )
 
+// "Borrowed" from https://gist.github.com/eagletmt/73a0d33d3d9c2aeb31c30ee05fed528b#file-main-go
+
 type Sdk struct {
 	Licenses       []License       `xml:"license"`
 	Channels       []Channel       `xml:"channel"`

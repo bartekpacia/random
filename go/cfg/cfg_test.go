@@ -2,16 +2,14 @@ package cfg_test
 
 import (
 	"testing"
-
-	"github.com/bartekpacia/random/cfg"
 )
 
 type stmt struct {
-	stmtType cfg.StatementType
+	stmtType StatementType
 	next     []int
 }
 
-func (s stmt) Type() cfg.StatementType {
+func (s stmt) Type() StatementType {
 	return s.stmtType
 }
 
@@ -26,35 +24,35 @@ func (s stmt) Next() []int {
 func TestGetBasicBlocks_Simple(t *testing.T) {
 	program := map[int]stmt{
 		0: {
-			stmtType: cfg.Simple,
+			stmtType: Simple,
 			next:     []int{1},
 		},
 		1: {
-			stmtType: cfg.ConditionalJump,
+			stmtType: ConditionalJump,
 			next:     []int{2, 3},
 		},
 		2: {
-			stmtType: cfg.UnconditionalJump,
+			stmtType: UnconditionalJump,
 			next:     []int{5},
 		},
 		3: {
-			stmtType: cfg.Simple,
+			stmtType: Simple,
 			next:     []int{4},
 		},
 		4: {
-			stmtType: cfg.UnconditionalJump,
+			stmtType: UnconditionalJump,
 			next:     []int{1},
 		},
 		5: {
-			stmtType: cfg.Simple,
+			stmtType: Simple,
 			next:     []int{},
 		},
 	}
 
-	statements := make([]cfg.Statement, len(program))
+	statements := make([]Statement, len(program))
 	for i, s := range program {
 		statements[i] = s
 	}
 
-	basicBlocks := cfg.GetBasicBlocks(statements)
+	basicBlocks := GetBasicBlocks(statements)
 }
