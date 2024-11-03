@@ -177,7 +177,6 @@ Ignores 40 years of language design
 - no switch expressions
 - no immutability
 
-
 2 absolutely great blogposts that point out weaknesses of Go, and argue that its
 "simplicity" mantra is a lie.
 
@@ -187,8 +186,7 @@ Ignores 40 years of language design
 
 ## Data Race Patterns in Go
 
-[Data Race Patterns in
-Go](https://www.uber.com/en-NL/blog/data-race-patterns-in-go)
+[Data Race Patterns in Go](https://www.uber.com/en-NL/blog/data-race-patterns-in-go)
 
 ## HackerNews
 
@@ -196,6 +194,11 @@ If you're into reading a good ol' flamewars, just google "hackernews golang".
 
 People always argue. I love it! So many different viewpoints.
 
+## My opinion
+
+I like Go. I like that it has the answers (or at least pretends to).
+
+https://youtu.be/187trX0mo1o?t=175
 
 # The end
 
