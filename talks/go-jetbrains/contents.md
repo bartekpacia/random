@@ -99,6 +99,7 @@ Just write the test for factorial:
 ```go
 package factorial_test
 
+import "testing"
 import "factorial"
 
 func TestFactorial(t *testing.T) {
@@ -127,6 +128,8 @@ The philosophy of preferring simple over complex/bloated solution. It's also
 expressed in its compatibility guarantee.
 
 I'd consider it an offspring of the Unix philosophy.
+
+## Unix Philosophy
 
 An effect of this is that there's no dominant framework in Go, like there's
 Spring in Java. When you ask about what framework to use, most people will tell
@@ -208,8 +211,7 @@ I also hope I convinced you to give Go a try. If I sparked your interest, you
 might appreciate some additional resources to read/watch:
 
 - [The Tour of Go](https://go.dev/tour)
+- [Go By Example](https://gobyexample.com)
 - [Go FAQ](https://go.dev/doc/faq)
 - [Go for Java programmers](https://go.dev/talks/2015/go-for-java-programmers.slide)
 - [Russ Cox about Go interfaces](https://research.swtch.com/interfaces)
-- [Google Go style guide](https://google.github.io/styleguide/go)
-- Dave Cheney's blog
