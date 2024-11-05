@@ -62,6 +62,28 @@ $ ./emu-cli run Pixel\ 7\ API\ 34 [tab] # nothing appears, selection has been ma
 
 The default Zsh behavior is dependent upon some `zstyle` options. By default, it suggestings files in $pwd.
 
+### Complete single element (with flags)
+
+Similar to the previous one, but should suggest subcommand's flags instead when user's entry
+starts with `-` or `--`.
+
+t=1
+
+```console
+$ ./emu-cli run --[tab]
+--fast
+--slow
+```
+
+t=2
+
+```console
+$ ./emu-cli run --fast [tab]
+Pixel 7 API 34
+iPhone 12 mini
+iPhone 15
+```
+
 ### Complete finite set of elements
 
 Use case: when a single option is selected, keep suggesting options but exclude the options already
@@ -92,7 +114,6 @@ t=2
 
 [docs]: https://github.com/spf13/cobra/blob/v1.8.0/site/content/completions/_index.md
 
-
 ## Debugging
 
 [Cobra docs](https://github.com/spf13/cobra/blob/v1.8.0/site/content/completions/_index.md#debugging)
@@ -107,7 +128,9 @@ Completion ended with directive: ShellCompDirectiveNoFileComp
 ```
 
 > ![NOTE]
-> The `:4` is [the directive](https://github.com/spf13/cobra/blob/756ba6dad61458cbbf7abecfc502d230574c57d2/completions.go#L43-L44).
+> The `:4`
+>
+is [the directive](https://github.com/spf13/cobra/blob/756ba6dad61458cbbf7abecfc502d230574c57d2/completions.go#L43-L44).
 
 ```go
 cobra.CompDebugln("this string will appear in __complete output", true)
@@ -134,4 +157,5 @@ $ export URFAVE_CLI_TRACING=on
 ## The plan
 
 API changes:
+
 - Add `cli.ShellComplete` func type, same as in cobra

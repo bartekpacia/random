@@ -88,8 +88,11 @@ var createCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(runCmd)
 	rootCmd.CompletionOptions.HiddenDefaultCmd = false // If false, the 'completion' command is shown in completions
+
+	rootCmd.AddCommand(runCmd)
+	runCmd.Flags().Bool("fast", false, "Run device quickly")
+	runCmd.Flags().Bool("slow", false, "Don't hurry up too much")
 
 	rootCmd.AddCommand(runAllCmd)
 
@@ -173,7 +176,7 @@ func main() {
 }
 
 var rootCmd = &cobra.Command{
-	Use:               "go-cobra",
+	Use:               "emu-cobra",
 	Short:             "A brief description of your application",
 	ValidArgsFunction: cobra.NoFileCompletions,
 }

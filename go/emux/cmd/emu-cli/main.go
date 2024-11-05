@@ -53,6 +53,16 @@ var runCmd = cli.Command{
 	Name:   "run",
 	Usage:  "Start a single device",
 	Action: action,
+	Flags: []cli.Flag{
+		&cli.BoolFlag{
+			Name:  "fast",
+			Usage: "Run device quickly",
+		},
+		&cli.BoolFlag{
+			Name:  "slow",
+			Usage: "Don't hurry up too much",
+		},
+	},
 	ShellComplete: func(ctx context.Context, cmd *cli.Command) {
 		for _, device := range devices {
 			fmt.Println(device)
