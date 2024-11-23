@@ -2,8 +2,8 @@ package pacia.tech;
 
 import java.util.List;
 
-public record ExampleRecord(String name, int age, List<String> favoriteCars) {
-  public ExampleRecord {
+public record ExampleComplexRecord(String name, int age, List<String> favoriteCars) {
+  public ExampleComplexRecord {
     favoriteCars = List.copyOf(favoriteCars);
   }
 
