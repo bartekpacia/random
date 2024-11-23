@@ -1,0 +1,9 @@
+{
+    "image": "alpine:3.20",
+    "commands": [
+        "apk add build-base",
+        "cd c/ && gcc main.c",
+        "./a.out"
+    ],
+    "timeout": 30
+}
