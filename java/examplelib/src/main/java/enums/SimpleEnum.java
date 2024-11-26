@@ -1,4 +1,4 @@
-package pacia.tech.enums;
+package enums;
 
 public enum SimpleEnum {
   CYAN, MAGENTA, YELLOW

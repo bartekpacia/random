@@ -1,4 +1,4 @@
-package pacia.tech.simple2;
+package simple2;
 
 import java.util.Optional;
 

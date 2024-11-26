@@ -1,5 +1,3 @@
-package pacia.tech;
-
 import java.util.ArrayList;
 
 public class Test extends ArrayList {

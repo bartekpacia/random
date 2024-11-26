@@ -3,7 +3,6 @@ plugins {
     kotlin("jvm")
 }
 
-group = "pacia.tech"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -29,6 +28,11 @@ tasks.test {
 tasks.withType<Jar> {
     archiveBaseName = "examplelib"
     archiveVersion = "1.0.0"
+}
+
+tasks.compileJava {
+    options.release = 23
+    options.compilerArgs.add("--enable-preview")
 }
 
 kotlin {

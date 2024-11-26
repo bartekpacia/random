@@ -1,4 +1,4 @@
-package pacia.tech.dummy;
+package dummy;
 
 import org.jetbrains.annotations.NotNull;
 

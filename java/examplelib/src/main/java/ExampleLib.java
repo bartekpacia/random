@@ -1,5 +1,3 @@
-package pacia.tech;
-
 import org.jetbrains.annotations.NotNull;
 
 public class ExampleLib {

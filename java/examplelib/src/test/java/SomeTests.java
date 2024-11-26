@@ -3,21 +3,30 @@ import org.junit.Test;
 
 public class SomeTests {
 
+  final long shortTimeout = (long) (Math.random() * 5000);
+  final long longTimeout = (long) (Math.random() * 7000);
+
   @Test
-  public void very() throws InterruptedException {
-    Thread.sleep((long) (Math.random() * 500));
+  public void alpha() throws InterruptedException {
+    Thread.sleep(shortTimeout);
     Assert.assertTrue(true);
   }
 
   @Test
-  public void random() throws InterruptedException {
-    Thread.sleep((long) (Math.random() * 500));
+  public void bravo() throws InterruptedException {
+    Thread.sleep(shortTimeout);
     Assert.assertTrue(true);
   }
 
   @Test
-  public void tests() throws InterruptedException {
-    Thread.sleep((long) (Math.random() * 500));
+  public void charlie() throws InterruptedException {
+    Thread.sleep(shortTimeout);
+    Assert.assertTrue(true);
+  }
+
+  @Test
+  public void delta() throws InterruptedException {
+    Thread.sleep(longTimeout);
     Assert.assertTrue(true);
   }
 }

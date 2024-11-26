@@ -1,5 +1,3 @@
-package pacia.tech;
-
 import java.io.IOException;
 
 public class BravoLib {

@@ -1,4 +1,4 @@
-package pacia.tech.enums;
+package enums;
 
 public class Foo {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package pacia.tech.oop;
+package oop;
 
 public class Animal {
   private final String name;
