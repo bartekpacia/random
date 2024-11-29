@@ -18,5 +18,3 @@ public class SomeJUnit4Test {
     assertTrue(s.isEmpty());
   }
 }
-
-// Assert.assertNotNull(s);

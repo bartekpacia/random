@@ -15,5 +15,3 @@ public class SomeJUnit3Test extends TestCase {
     assertTrue(s.isEmpty());
   }
 }
-
-// assertNotNull(s);

@@ -1,7 +1,6 @@
 import org.jetbrains.annotations.Nullable;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 public class SomeTestNGTest {
@@ -16,8 +15,7 @@ public class SomeTestNGTest {
   @Test
   public void test() {
     String s = getNullableString();
-    assertTrue(s.isEmpty());
+    //noinspection SimplifiableConditionalExpression
+    assertTrue((s.isEmpty() ? true : false));
   }
 }
-
-// Assert.assertNotNull(s);

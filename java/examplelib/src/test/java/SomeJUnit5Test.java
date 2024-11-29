@@ -1,7 +1,6 @@
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SomeJUnit5Test {
@@ -16,9 +15,6 @@ public class SomeJUnit5Test {
   @Test
   public void test() {
     String s = getNullableString();
-    assertNotNull(s);
     assertTrue(s.isEmpty());
   }
 }
-
-// Assertions.assertNotNull(s);
