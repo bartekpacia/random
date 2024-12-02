@@ -15,6 +15,7 @@ dependencies {
     // JUnit5
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.platform:junit-platform-suite")
 
     // AssertJ
     testImplementation("org.assertj:assertj-core:3.26.3")
