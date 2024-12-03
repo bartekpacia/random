@@ -55,10 +55,14 @@ public class SimplifyIfStatement {
     return "baz";
   }
 
-  String method99(boolean value) {
+  String method8(boolean value) {
     if (Boolean.TRUE.equals(value)) {
       return "foo";
     }
+    return "baz";
+  }
+
+  String method9(boolean value) {
     if (true == value) {
       return "bar";
     }
@@ -69,5 +73,78 @@ public class SimplifyIfStatement {
     if (Math.random() > 0.66) return true;
     if (Math.random() > 0.33) return false;
     return null;
+  }
+}
+
+
+class BoxedSign1 {
+  String method() {
+    if (returnsBool() == Boolean.TRUE) {
+      return "foo";
+    }
+    return "baz";
+  }
+
+  public Boolean returnsBool() {
+    return Math.random() > 0.5;
+  }
+}
+
+
+class BoxedSign2 {
+  String method() {
+    if (returnsBool() == Boolean.TRUE) {
+      return "foo";
+    }
+    return "baz";
+  }
+
+  public @Nullable Boolean returnsBool() {
+    return Math.random() > 0.5;
+  }
+}
+
+class BoxedSign3Complex {
+  String method() {
+    if (returnsBool() == Boolean.TRUE || maybeReturnsBool() == Boolean.TRUE) {
+      return "foo";
+    }
+    return "baz";
+  }
+
+  public Boolean returnsBool() {
+    return Math.random() > 0.5;
+  }
+
+  public @Nullable Boolean maybeReturnsBool() {
+    return Math.random() > 0.5;
+  }
+}
+
+
+class BoxedCall1 {
+  String method(boolean value) {
+    if (Boolean.TRUE.equals(returnsBool(value))) {
+      return "foo";
+    }
+    return "baz";
+  }
+
+  public Boolean returnsBool(boolean value) {
+    return Math.random() > 0.5;
+  }
+}
+
+
+class BoxedCall2 {
+  String method(boolean value) {
+    if (Boolean.TRUE.equals(returnsBool(value))) {
+      return "foo";
+    }
+    return "baz";
+  }
+
+  public @Nullable Boolean returnsBool(boolean value) {
+    return Math.random() > 0.5;
   }
 }
