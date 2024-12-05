@@ -121,6 +121,15 @@ class BoxedSign3Complex {
   }
 }
 
+class Boxed {
+  String method(boolean value) {
+    if (value == ((Boolean.TRUE))) {
+      return "foo";
+    }
+    return "baz";
+  }
+}
+
 
 class BoxedCall1 {
   String method(boolean value) {
