@@ -2,5 +2,5 @@
 a.out
 out/
 
-.idea/
+#.idea/
 .kotlin/
