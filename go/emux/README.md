@@ -3,13 +3,15 @@ This small Go app is for testing [Cobra's shell completion capabilities][docs].
 Build:
 
 ```console
-$ go build -o emu-cli ./cmd/emu-cli.go
+$ go build -o emu-cli ./cmd/emu-cli # build CLI built with urfave/cli
+$ go build -o emu-cobra ./cmd/emu-cobra # build CLI built with spf13/cobra
 ```
 
 Source completions for the current shell:
 
 ```console
 $ . <(./emu-cli completion zsh)
+$ . <(./emu-cobra completion zsh)
 ```
 
 Test command completion:
@@ -158,4 +160,14 @@ $ export URFAVE_CLI_TRACING=on
 
 API changes:
 
-- Add `cli.ShellComplete` func type, same as in cobra
+- Add `cli.ShellCompleteFunc` func type, same as in cobra
+
+
+** Decision to be made**
+
+Does `urfave/cli` migrate to hidden `__complete` command,
+or does it keep `--generate-shell-completion` arg?
+
+
+- This is quite hard, writing tests first is probably good idea. Take a look at
+  how shell completion is tested in Cobra.

@@ -1,5 +1,7 @@
+import org.assertj.core.api.Assertions
 import org.junit.Assert
 import org.junit.Test
+import org.assertj.core.api.Assertions.assertThat
 
 
 interface FileManager {
@@ -30,5 +32,12 @@ class MoreKotlinTests {
         val actual: Int = 3
         Assert.assertEquals(expected, actual)
         Assert.assertEquals(expected, "foo")
+    }
+
+    fun myValueClassTestAssertJ() {
+        val a = ValueClass("a")
+        val b = ValueClass("b")
+        Assert.assertEquals(a, b)
+        Assertions.assertThat(a).isEqualTo(b)
     }
 }
