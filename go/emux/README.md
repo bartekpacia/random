@@ -37,13 +37,27 @@ emulators and iOS simulators.
 
 ## Examples
 
-### Complete commands and options
+### Complete commands
+
+t=1
 
 ```console
-./emu-cli [tab]
+$ ./emu-cli [tab]
+create  -- Create a new device
+kill    -- Kill a single device
+run     -- Start a single device
+runall  -- Start many devices
 ```
 
-### Complete single element
+t=1
+
+```console
+$ ./emu-cli r[tab]
+run     -- Start a single device
+runall  -- Start many devices
+```
+
+### Complete a single command argument
 
 Use case: when an option has been selected, don't suggest any more completions.
 
@@ -62,7 +76,7 @@ t=2
 $ ./emu-cli run Pixel\ 7\ API\ 34 [tab] # nothing appears, selection has been made
 ```
 
-The default Zsh behavior is dependent upon some `zstyle` options. By default, it suggestings files in $pwd.
+The default Zsh behavior is dependent upon some `zstyle` options. By default, it suggests files in $pwd.
 
 ### Complete single element (with flags)
 
@@ -112,6 +126,16 @@ t=2
 
 ```console
 ./emu-cli run Pixel 7 API 34 iPhone 12 mini
+```
+
+### Complete a single value for a flag element (with flags)
+
+Similar to the previous one, but in this case (when current arguments starts
+with `-` or `--`) we want to suggests the values available for a particular
+flag.
+
+```console
+$ TODO: invent some example (e.g. --device [value])
 ```
 
 [docs]: https://github.com/spf13/cobra/blob/v1.8.0/site/content/completions/_index.md

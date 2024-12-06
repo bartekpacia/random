@@ -28,10 +28,78 @@ func main() {
 			},
 		},
 		Commands: []*cli.Command{
-			&runCmd,
-			&runAllCmd,
-			&killCmd,
-			&createCmd,
+			{
+				Name:   "run",
+				Usage:  "Start a single device",
+				Action: action,
+				Flags: []cli.Flag{
+					&cli.BoolFlag{
+						Name:  "fast",
+						Usage: "Run device quickly",
+					},
+					&cli.BoolFlag{
+						Name:  "slow",
+						Usage: "Don't hurry up too much",
+					},
+				},
+				ShellComplete: func(ctx context.Context, cmd *cli.Command) {
+					for _, device := range devices {
+						fmt.Println(device)
+					}
+				},
+			},
+			// TODO: Not expressible in urfave/cli
+			{
+				Name:   "runall",
+				Usage:  "Start many devices",
+				Action: action,
+				ShellComplete: func(ctx context.Context, cmd *cli.Command) {
+					for _, device := range devices {
+						fmt.Println(device)
+					}
+				},
+			},
+			// TODO: Not expressible in urfave/cli
+			{
+				Name:   "kill",
+				Usage:  "Kill a single device",
+				Action: action,
+				ShellComplete: func(ctx context.Context, cmd *cli.Command) {
+					for _, device := range devices {
+						fmt.Println(device)
+					}
+				},
+			},
+			{
+				Name:   "create",
+				Usage:  "Create a new device",
+				Action: action,
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "os",
+						Usage: "OS of the device",
+						// TODO: func ShellComplete
+					},
+					&cli.StringFlag{
+						Name:  "os-version",
+						Usage: "OS image version",
+						// TODO: func ShellComplete
+					},
+					&cli.StringFlag{
+						Name:  "frame",
+						Usage: "Frame of the device",
+						// TODO: func ShellComplete
+					},
+				},
+				ShellComplete: func(ctx context.Context, cmd *cli.Command) {
+					androidCompletions := []string{"Android 14 (API 33)", "Android 14 (API 33) Play Store", "Android 15 (API 34)"}
+					iosCompletions := []string{"iOS 15", "iOS 16", "iOS 17"}
+
+					completions := make([]string, 0)
+					completions = append(completions, androidCompletions...)
+					completions = append(completions, iosCompletions...)
+				},
+			},
 		},
 		CommandNotFound: func(ctx context.Context, c *cli.Command, command string) {
 			log.Printf("invalid command '%s'", command)
@@ -47,80 +115,4 @@ func main() {
 func action(ctx context.Context, c *cli.Command) error {
 	fmt.Printf("command %#v called with args: %#v\n", c.Name, c.Args().Slice())
 	return nil
-}
-
-var runCmd = cli.Command{
-	Name:   "run",
-	Usage:  "Start a single device",
-	Action: action,
-	Flags: []cli.Flag{
-		&cli.BoolFlag{
-			Name:  "fast",
-			Usage: "Run device quickly",
-		},
-		&cli.BoolFlag{
-			Name:  "slow",
-			Usage: "Don't hurry up too much",
-		},
-	},
-	ShellComplete: func(ctx context.Context, cmd *cli.Command) {
-		for _, device := range devices {
-			fmt.Println(device)
-		}
-	},
-}
-
-// TODO: Not expressible in urfave/cli
-var runAllCmd = cli.Command{
-	Name:   "runall",
-	Usage:  "Start many devices",
-	Action: action,
-	ShellComplete: func(ctx context.Context, cmd *cli.Command) {
-		for _, device := range devices {
-			fmt.Println(device)
-		}
-	},
-}
-
-// TODO: Not expressible in urfave/cli
-var killCmd = cli.Command{
-	Name:   "kill",
-	Usage:  "Kill a single device",
-	Action: action,
-	ShellComplete: func(ctx context.Context, cmd *cli.Command) {
-		for _, device := range devices {
-			fmt.Println(device)
-		}
-	},
-}
-
-var createCmd = cli.Command{
-	Name:   "create",
-	Usage:  "Create a new device",
-	Action: action,
-	Flags: []cli.Flag{
-		&cli.StringFlag{
-			Name:  "os",
-			Usage: "OS of the device",
-			// TODO: func ShellComplete
-		},
-		&cli.StringFlag{
-			Name:  "os-version",
-			Usage: "OS image version",
-			// TODO: func ShellComplete
-		},
-		&cli.StringFlag{
-			Name:  "frame",
-			Usage: "Frame of the device",
-			// TODO: func ShellComplete
-		},
-	},
-	ShellComplete: func(ctx context.Context, cmd *cli.Command) {
-		androidCompletions := []string{"Android 14 (API 33)", "Android 14 (API 33) Play Store", "Android 15 (API 34)"}
-		iosCompletions := []string{"iOS 15", "iOS 16", "iOS 17"}
-
-		completions := make([]string, 0)
-		completions = append(completions, androidCompletions...)
-		completions = append(completions, iosCompletions...)
-	},
 }
