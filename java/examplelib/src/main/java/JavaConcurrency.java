@@ -12,7 +12,8 @@ public class JavaConcurrency {
       final String result = subtask.get();
       assert result.equals("data");
       System.out.println("Task finished, result: " + result);
-    } catch (InterruptedException e) {
+    }
+    catch (InterruptedException e) {
       e.printStackTrace();
     }
   }
