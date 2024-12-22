@@ -8,3 +8,5 @@ The pico has 2 modes:
 - normal run mode
 
 
+links:
+- [wiring](https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html#pico-1-technical-specification)
