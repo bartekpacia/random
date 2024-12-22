@@ -69,7 +69,6 @@ public class SimplifyIfStatement {
         return "baz";
     }
 
-
     @Nullable Boolean returnsNullableBoolean() {
         if (Math.random() > 0.66) return true;
         if (Math.random() > 0.33) return false;

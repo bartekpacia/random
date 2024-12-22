@@ -2,6 +2,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 fun main() {
+  println("hi Tagir")
   println("hello world")
   assert(2 + 2 == 4)
   println("hello everyone!")
