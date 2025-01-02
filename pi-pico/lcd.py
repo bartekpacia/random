@@ -128,6 +128,23 @@ display = LCD()
 display.init()
 
 display.set_line(0)
-display.set_string("Hello world!")
+display.set_string("Wybrany obiekt:")
 display.set_line(1)
-display.set_string("I am Pi Pico!")
+display.set_string("Bartek - sufit 1")
+print('here!')
+
+led = Pin(15, Pin.OUT)
+timer = Timer()
+seconds_passed = 0
+
+def blink(timer):
+    global seconds_passed
+    led.toggle()
+    display.set_line(0)
+    display.set_string("Wybrany obiekt:")
+    display.set_line(1)
+    display.set_string("Sekundy: " + str(seconds_passed))
+    seconds_passed += 1
+    
+timer.init(freq=1, mode=Timer.PERIODIC, callback=blink)
+
