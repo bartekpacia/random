@@ -158,24 +158,36 @@ def led_on():
 def led_off():
     led2(0)
 
+usb_serial = machine.UART(0, baudrate=115200)
 
+# Main loop
 while True:
-    # read a command from the host
-    v = sys.stdin.readline().strip()
-    print(f"received '{v}'")
+    received_data = usb_serial.readline()  # Read the data
+    print("Received:", received_data.decode().strip())
     
-    # sys.stdout.write(b"pong\n")
-    sys.stdout.print("pong")
-    print("sent 'pong'")
+    # Send a response back to the PC
+    usb_serial.write(b"Pico received: " + received_data)
+    utime.sleep(1)  # Optional delay
+    print('sleeping')
+    print('no')
+
+# while True:
+#     # read a command from the host
+#     v = sys.stdin.readline().strip()
+#     print(f"received '{v}'")
     
-    led2.toggle()
+#     # sys.stdout.write(b"pong\n")
+#     sys.stdout.print("pong")
+#     print("sent 'pong'")
     
-    continue
+#     led2.toggle()
+    
+#     continue
 
 
 
-    # perform the requested action
-    if v.lower() == "on":
-        led_on()
-    elif v.lower() == "off":
-        led_off()
+#     # perform the requested action
+#     if v.lower() == "on":
+#         led_on()
+#     elif v.lower() == "off":
+#         led_off()

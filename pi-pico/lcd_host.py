@@ -11,6 +11,8 @@ s = serial.Serial("/dev/cu.usbmodem1101", 115200)
 # blink the led
 while True:
     s.write(b"ping\n")
+    time.sleep(1)
+    continue
     print("sent 'ping'")
     time.sleep(1)
     response = s.readline()
