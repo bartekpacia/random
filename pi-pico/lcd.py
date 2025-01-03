@@ -1,5 +1,6 @@
 from machine import Pin, Timer
 import utime
+import sys
 
 # Almost entirely copied from micropython-lcd by wjdp
 # https://github.com/wjdp/micropython-lcd
@@ -133,13 +134,15 @@ display.set_line(1)
 display.set_string("Bartek - sufit 1")
 print('here!')
 
-led = Pin(15, Pin.OUT)
+led1 = Pin(15, Pin.OUT)
+led2 = Pin(9, Pin.OUT)
+led2(0)
 timer = Timer()
 seconds_passed = 0
 
 def blink(timer):
     global seconds_passed
-    led.toggle()
+    led1.toggle()
     display.set_line(0)
     display.set_string("Wybrany obiekt:")
     display.set_line(1)
@@ -148,3 +151,31 @@ def blink(timer):
     
 timer.init(freq=1, mode=Timer.PERIODIC, callback=blink)
 
+
+def led_on():
+    led2(1)
+
+def led_off():
+    led2(0)
+
+
+while True:
+    # read a command from the host
+    v = sys.stdin.readline().strip()
+    print(f"received '{v}'")
+    
+    # sys.stdout.write(b"pong\n")
+    sys.stdout.print("pong")
+    print("sent 'pong'")
+    
+    led2.toggle()
+    
+    continue
+
+
+
+    # perform the requested action
+    if v.lower() == "on":
+        led_on()
+    elif v.lower() == "off":
+        led_off()
