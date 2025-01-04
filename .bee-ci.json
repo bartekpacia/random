@@ -6,6 +6,9 @@
         "git clone https://github.com/bartekpacia/random.git random-repo",
         "echo \"pwd is $(pwd)\"",
         "ls -lah",
+        "cd random-repo",
+        "echo \"pwd is $(pwd)\"",
+        "ls -lah",
         "cd random-repo/c/ && gcc main.c",
         "cd random-repo/c/ && ./a.out"
     ],
