@@ -1,10 +1,11 @@
 {
     "image": "alpine:3.20",
     "commands": [
-        "apk add build-base",
+        "apk add build-base git",
         "ls",
-        "cd c/ && gcc main.c",
-        "./a.out"
+        "git clone https://github.com/bartekpacia/random.git random-repo",
+        "cd random-repo/c/ && gcc main.c",
+        "cd random-repo/c/ && ./a.out"
     ],
     "timeout": 30
 }
