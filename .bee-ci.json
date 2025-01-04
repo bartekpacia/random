@@ -6,12 +6,12 @@
         "git clone https://github.com/bartekpacia/random.git random-repo",
         "echo \"pwd is $(pwd)\"",
         "ls -lah",
-        "cd random-repo",
+        "cd random-repo/c",
         "echo \"pwd is $(pwd)\"",
         "ls -lah",
         "echo \"pwd2 is $(pwd)\"",
-        "cd /random-repo/c && gcc main.c",
-        "cd /random-repo/c && ./a.out"
+        "gcc main.c",
+        "./a.out"
     ],
     "timeout": 30
 }
