@@ -2,14 +2,8 @@
     "image": "alpine:3.20",
     "commands": [
         "apk add build-base git",
-        "ls",
         "git clone https://github.com/bartekpacia/random.git random-repo",
-        "echo \"pwd is $(pwd)\"",
-        "ls -lah",
         "cd random-repo/c",
-        "echo \"pwd is $(pwd)\"",
-        "ls -lah",
-        "echo \"pwd2 is $(pwd)\"",
         "gcc main.c",
         "./a.out"
     ],
