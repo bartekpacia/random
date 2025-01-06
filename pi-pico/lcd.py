@@ -1,6 +1,7 @@
 from machine import Pin, Timer
 import utime
 import sys
+from picozero import Button
 
 # Almost entirely copied from micropython-lcd by wjdp
 # https://github.com/wjdp/micropython-lcd
@@ -128,17 +129,25 @@ class LCD(object):
 display = LCD()
 display.init()
 
+selected_device = 0
+devices = ['Bartek-sufit1','Bartek-sufit2','Bartek-sufit3']
+
 display.set_line(0)
 display.set_string("Wybrany obiekt:")
 display.set_line(1)
-display.set_string("Bartek - sufit 1")
-print('here!')
+display.set_string(devices[selected_device])
+print('Display initialized')
 
+timer = Timer()
+button = Pin(0, Pin.IN, Pin.PULL_DOWN) # instead we use picozero.Button
+# button = Button(0)
 led1 = Pin(15, Pin.OUT)
 led2 = Pin(9, Pin.OUT)
+led1(0)
 led2(0)
-timer = Timer()
 seconds_passed = 0
+
+print(sys.stdin)
 
 def blink(timer):
     global seconds_passed
@@ -146,48 +155,42 @@ def blink(timer):
     display.set_line(0)
     display.set_string("Wybrany obiekt:")
     display.set_line(1)
-    display.set_string("Sekundy: " + str(seconds_passed))
+    # display.set_string("Sekundy: " + str(seconds_passed)) # this was used for debugging only
+    display.set_string(devices[selected_device])
     seconds_passed += 1
     
 timer.init(freq=1, mode=Timer.PERIODIC, callback=blink)
 
+def on_button_pressed():
+    print('button pressed')
+    global selected_device
+    global devices
+    selected_device += 1
+    if selected_device >= len(devices):
+        selected_device = 0
+        
+    display.set_line(0)
+    display.set_string("Wybrany obiekt:")
+    display.set_line(1)
+    display.set_string(devices[selected_device])
+    
 
-def led_on():
-    led2(1)
+#button.when_pressed = on_button_pressed
 
-def led_off():
-    led2(0)
-
-usb_serial = machine.UART(0, baudrate=115200)
-
-# Main loop
 while True:
-    received_data = usb_serial.readline()  # Read the data
-    print("Received:", received_data.decode().strip())
-    
-    # Send a response back to the PC
-    usb_serial.write(b"Pico received: " + received_data)
-    utime.sleep(1)  # Optional delay
-    print('sleeping')
-    print('no')
+    # continue
+    # Light up the blue diode to show that the button is pressed
+    button_enabled = button.value()
+    if button_enabled:
+        on_button_pressed()
+        utime.sleep_ms(500)
+    else:
+        led2(0)
 
-# while True:
-#     # read a command from the host
-#     v = sys.stdin.readline().strip()
-#     print(f"received '{v}'")
+    # read a command from the host
+    # v = sys.stdin.readline().strip()
+    # print(f"received '{v}'")
     
-#     # sys.stdout.write(b"pong\n")
-#     sys.stdout.print("pong")
-#     print("sent 'pong'")
-    
-#     led2.toggle()
-    
-#     continue
-
-
-
-#     # perform the requested action
-#     if v.lower() == "on":
-#         led_on()
-#     elif v.lower() == "off":
-#         led_off()
+    # sys.stdout.write(b"pong\n")
+    # sys.stdout.print("pong")
+    # print("sent 'pong' (not really)")
