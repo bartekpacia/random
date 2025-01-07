@@ -1,12 +1,12 @@
-import 'dart:isolate';
 import 'dart:io' as io;
+import 'dart:isolate';
 
 void main(List<String> args) {
   final sw = Stopwatch()..start();
   final String arg = args.first;
 
   if (arg == "future") {
-    final sw = Stopwatch()..start();
+    Stopwatch()..start();
     _longWork();
     print("started long work: future");
   } else if (arg == "isolate_run") {

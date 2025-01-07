@@ -18,5 +18,3 @@ while True:
     response = s.readline()
     print(f"received '{response}'")
     time.sleep(1)
-
-

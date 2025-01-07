@@ -6,7 +6,7 @@ while True:
     v = sys.stdin.readline().strip()
     print(f"received '{v}'")
     time.sleep(1)
-    
+
     sys.stdout.print(b"pong\n")
     #  sys.stdout.write(b"pong\n")
     print("sent 'pong'")

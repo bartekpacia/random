@@ -2,6 +2,8 @@ from machine import Pin, Timer
 import utime
 import sys
 from picozero import Button
+import network
+import urequests
 
 # Almost entirely copied from micropython-lcd by wjdp
 # https://github.com/wjdp/micropython-lcd
@@ -129,13 +131,26 @@ class LCD(object):
 display = LCD()
 display.init()
 
-selected_device = 0
-devices = ['Bartek-sufit1','Bartek-sufit2','Bartek-sufit3']
+selected_device_idx = 0
+devices = [
+    {
+        "name": "Bartek-sufit1",
+        "id": 380,
+    },
+    {
+        "name": "Bartek-sufit2",
+        "id": 291,
+    },
+    {
+        "name": "Bartek-sufit3",
+        "id": 381,
+    },
+]
 
 display.set_line(0)
 display.set_string("Wybrany obiekt:")
 display.set_line(1)
-display.set_string(devices[selected_device])
+display.set_string(devices[selected_device_idx]["name"])
 print('Display initialized')
 
 timer = Timer()
@@ -147,7 +162,17 @@ led1(0)
 led2(0)
 seconds_passed = 0
 
-print(sys.stdin)
+SSID = 'Barteks-iPhone'
+PASSWORD = 'my-password'
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+wlan.connect(SSID, PASSWORD)
+while wlan.isconnected() == False:
+    print('Waiting for connection...')
+    utime.sleep_ms(1000)
+
+ip = wlan.ifconfig()[0]
+print(f"Connected to network, our IP: {ip}")
 
 def blink(timer):
     global seconds_passed
@@ -156,26 +181,33 @@ def blink(timer):
     display.set_string("Wybrany obiekt:")
     display.set_line(1)
     # display.set_string("Sekundy: " + str(seconds_passed)) # this was used for debugging only
-    display.set_string(devices[selected_device])
+    display.set_string(devices[selected_device_idx]["name"])
     seconds_passed += 1
     
-timer.init(freq=1, mode=Timer.PERIODIC, callback=blink)
+# timer.init(freq=1, mode=Timer.PERIODIC, callback=blink)
 
 def on_button_pressed():
     print('button pressed')
-    global selected_device
+    global selected_device_idx
     global devices
-    selected_device += 1
-    if selected_device >= len(devices):
-        selected_device = 0
+    selected_device_idx += 1
+    if selected_device_idx >= len(devices):
+        selected_device_idx = 0
         
+    selected_device = devices[selected_device_idx]
     display.set_line(0)
     display.set_string("Wybrany obiekt:")
     display.set_line(1)
-    display.set_string(devices[selected_device])
-    
+    display.set_string(selected_device["name"])
 
-#button.when_pressed = on_button_pressed
+    #response = urequests.get("https://google.com")
+    #print("google_response: " + str(response))
+    #response.close()
+
+    headers = {"Authorization": "Passphrase: my-passphrase"}
+    response = urequests.get(f"http://172.20.10.3:9001/api/devices/{selected_device['id']}", headers=headers)
+    print(f"made request, response status code: {response.status_code}")
+    response.close()
 
 while True:
     # continue
