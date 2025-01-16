@@ -145,6 +145,10 @@ devices = [
         "name": "Bartek-sufit3",
         "id": 381,
     },
+    {
+        "name": "Brama",
+        "id": 260,
+    },
 ]
 
 display.set_line(0)
