@@ -1,0 +1,25 @@
+appId: com.tinder
+name: SwipingValentines
+---
+- launchApp:
+    clearState: false
+- runScript: init.js
+- tapOn: TextField
+- inputText: kathie@gmail.com
+- repeat:
+    times: 3
+    commands:
+        - swipe:
+            start: 80%, 50%
+            end: 20%, 50%
+            duration: 1000
+        - evalScript: ${console.log('Done')}
+        - takeScreenshot: screenshot_${output.index}
+# - tapOn: Next
+
+# LOOP UNTIL "OUT OF LIKES" NOTIFICATION APPEARS
+    # --- send screenshot(s) to <?>
+    # --- get response: like or dislike
+    # --- like: --> swipe right
+    # --- dislike: --> swipe left
+

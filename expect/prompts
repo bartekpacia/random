@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+read -p "What is your name? " name 
+read -p "What is your country? " country 
+read -p "Enter your email address: " email
+
+printf "Hello %s, from %s!\n" "$name" "$country"

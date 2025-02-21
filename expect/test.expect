@@ -1,0 +1,10 @@
+#!/usr/bin/env expect -f
+
+set timeout 1
+
+spawn ./prompts
+expect "What is your name?" { send "Bartek\n" }
+expect "What is your country?" { send "Poland\n" }
+expect "Enter your email address" { send "barpac02@gmail.com\n" }
+expect "Hello Bartek, from Poland!"
+expect EOF
