@@ -25,6 +25,10 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(kotlin("stdlib-jdk8"))
 
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
+
+    implementation("org.jetbrains:annotations:26.0.2")
+
     // Sample lib
     implementation(files("../java/examplelib/build/libs/examplelib-1.0.0.jar"))
 }
@@ -33,6 +37,11 @@ tasks.test {
     useJUnitPlatform()
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }

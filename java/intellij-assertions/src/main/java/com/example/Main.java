@@ -1,18 +1,36 @@
 package com.example;
 
-import pacia.tech.BravoLib;
-import pacia.tech.ExampleLib;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+class Foo {
+  @ApiStatus.OverrideOnly
+  private void lol1() {}
+
+  @ApiStatus.OverrideOnly
+  final void lol2() {}
+
+  @ApiStatus.OverrideOnly
+  static void lol3() {}
+}
 
 public class Main {
+  private static final int SOME_CONSTANT = 0;
+
   public static void main(String[] args) throws IOException {
-    System.out.println("Hello and welcome!");
-    ExampleLib l = new ExampleLib();
-    int myvar = l.myLibraryFunc(10);
+    List<String> myList = new ArrayList<String>();
+    myList.add("xd");
+    myList.add("bruh");
 
-    BravoLib b = new BravoLib();
+    var myVar = myList.get(SOME_CONSTANT);
+    var lolVar = myList.remove(SOME_CONSTANT);
+    myList.add(SOME_CONSTANT, "lol");
 
-    System.out.println("myvar = " + myvar);
+    System.out.println("Hello and welcome! myVar is: " + myVar + lolVar);
+
   }
 }
