@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class Foo {
+class Boo {
   @ApiStatus.OverrideOnly
   private void lol1() {}
 
@@ -22,6 +22,9 @@ public class Main {
   private static final int SOME_CONSTANT = 0;
 
   public static void main(String[] args) throws IOException {
+    var a = new Foo("xd");
+    var b = a.isValid();
+
     List<String> myList = new ArrayList<String>();
     myList.add("xd");
     myList.add("bruh");
