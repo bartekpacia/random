@@ -22,6 +22,8 @@ public class Main {
   private static final int SOME_CONSTANT = 0;
 
   public static void main(String[] args) throws IOException {
+    RecordDemo recordDemo;
+
     var a = new Foo("xd");
     var b = a.isValid();
 

@@ -17,3 +17,11 @@ public final class RecordDemo {
     return someObject;
   }
 }
+
+class Person {
+  final Object someObject;
+
+  Person(Object someObject) {
+    this.someObject = someObject;
+  }
+}
