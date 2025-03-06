@@ -6,7 +6,6 @@ public class Main {
   public Main() {
     System.out.println("Created!");
     incrementInt(incrementInt(incrementInt(foo)));
-    return;
   }
 
   public static void main(String[] args) {
