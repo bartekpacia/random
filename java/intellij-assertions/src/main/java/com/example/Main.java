@@ -15,7 +15,9 @@ class Boo {
   final void lol2() {}
 
   @ApiStatus.OverrideOnly
-  static void lol3() {}
+  static void lol3() {
+
+  }
 }
 
 public class Main {
@@ -23,6 +25,8 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     RecordDemo recordDemo;
+
+    int b = SOME_CONSTANT * 1;
 
     var a = new Foo("xd");
     var b = a.isValid();
