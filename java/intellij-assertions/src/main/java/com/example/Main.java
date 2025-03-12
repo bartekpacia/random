@@ -1,45 +1,39 @@
 package com.example;
 
-import org.jetbrains.annotations.ApiStatus;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-
-class Boo {
-  @ApiStatus.OverrideOnly
-  private void lol1() {}
-
-  @ApiStatus.OverrideOnly
-  final void lol2() {}
-
-  @ApiStatus.OverrideOnly
-  static void lol3() {
-
-  }
-}
 
 public class Main {
-  private static final int SOME_CONSTANT = 0;
 
   public static void main(String[] args) throws IOException {
-    RecordDemo recordDemo;
+    Main main = new Main();
+    main.funAlpha();
+  }
 
-    int b = SOME_CONSTANT * 1;
+  private void funAlpha() {
+    funBravo();
+  }
 
-    var a = new Foo("xd");
-    var b = a.isValid();
+  private void funBravo() {
+    funCharlie();
+  }
 
-    List<String> myList = new ArrayList<String>();
-    myList.add("xd");
-    myList.add("bruh");
+  private void funCharlie() {
+    try {
+      foo();
+    } catch (NullPointerException ex) {
+      throw new IllegalArgumentException("NoooOoo! Null was passed", ex);
+    }
+  }
 
-    var myVar = myList.get(SOME_CONSTANT);
-    var lolVar = myList.remove(SOME_CONSTANT);
-    myList.add(SOME_CONSTANT, "lol");
+  private void foo() {
+    bar();
+  }
 
-    System.out.println("Hello and welcome! myVar is: " + myVar + lolVar);
-
+  private void bar() {
+    Main m = null;
+    m.bar();
   }
 }
+
+
+
