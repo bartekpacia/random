@@ -17,7 +17,7 @@ public class BlahClasses {
     }
   };
 
-  public void main() {
+  public void main(int parameter) {
     int localVar = 2;
 
     class PossiblyStaticLocalClass {
@@ -33,6 +33,10 @@ public class BlahClasses {
 
       public int nested() {
         return staticInt;
+      }
+
+      public int nested2(int myParameter) {
+        return staticInt + myParameter; // + localVar
       }
     }
 
@@ -65,6 +69,22 @@ public class BlahClasses {
 
       public int nested() {
         return localVar;
+      }
+    }
+
+    class ImpossiblyStaticLocalClass_3 {
+      private final String name;
+
+      ImpossiblyStaticLocalClass_3(String name) {
+        this.name = name;
+      }
+
+      public String getName() {
+        return name;
+      }
+
+      public int nested() {
+        return parameter;
       }
     }
 
