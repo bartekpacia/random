@@ -1,6 +1,10 @@
 package com.example;
 
-public class BlahClasses {
+class MySuperClass {
+  protected int mySuperVar;
+}
+
+public class BlahClasses extends MySuperClass {
   private int instanceInt = 1;
   private static int staticInt = 1;
 
@@ -10,12 +14,15 @@ public class BlahClasses {
     }
   }
 
-  private Listener listener = new Listener() {
-    @Override
-    public void onClick() {
-
-    }
-  };
+  public void instanceMethod(int parameter) {
+    int myLocalVar = 4;
+    Listener listener = new Listener() {
+      @Override
+      public void onClick() {
+        int a = 2 + myLocalVar + parameter;
+      }
+    };
+  }
 
   public void main(int parameter) {
     int localVar = 2;
@@ -24,7 +31,7 @@ public class BlahClasses {
       private final String name;
 
       PossiblyStaticLocalClass(String name) {
-        this.name = name;
+        this.name = name + localVar;
       }
 
       public String getName() {

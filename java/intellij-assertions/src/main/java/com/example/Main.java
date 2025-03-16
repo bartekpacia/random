@@ -9,8 +9,12 @@ public class Main {
     main.funAlpha();
   }
 
-  private void funAlpha() {
+  private void funAlpha(int x) {
     funBravo();
+
+    for (int i = 0; i < 10; i++) {
+      System.out.println("Hello World!" + x);
+    }
   }
 
   private void funBravo() {
@@ -34,6 +38,3 @@ public class Main {
     m.bar();
   }
 }
-
-
-
