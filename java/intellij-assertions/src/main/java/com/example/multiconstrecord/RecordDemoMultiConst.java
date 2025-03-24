@@ -72,7 +72,29 @@ class NonCanonicalClass {
 }
 
 record NonCanonicalRecord(String name, int age) {
-  NonCanonicalRecord(String name) {
-    this(name, 42);
+
+  // During conversion to record, this constructor will become a canonical constructor, and then be removed because it's redundant.
+  // Removal of a redundant canonical constructor is actually an inspection on its own: RedundantRecordConstructorInspection
+  NonCanonicalRecord(String name, int age) {
+    this.name = name;
+    this.age = age;
   }
 }
+
+
+record MyAnotherRecord(String name, int age) {
+  MyAnotherRecord {
+    name = "xd";
+    age = 10;
+  }
+
+  MyAnotherRecord(String name, int age, int foo) {
+    this(name, age);
+  }
+
+  MyAnotherRecord(String name) {
+    this(name, 2137, 10);
+  }
+}
+
+
