@@ -22,4 +22,4 @@ open class Class {
 }
 
 @ApiStatus.NonExtendable
-class XD {}
+class XD

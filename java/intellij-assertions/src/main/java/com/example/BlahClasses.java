@@ -5,8 +5,8 @@ class MySuperClass {
 }
 
 public class BlahClasses extends MySuperClass {
-  private int instanceInt = 1;
-  private static int staticInt = 1;
+  private final int instanceInt = 1;
+  private static final int staticInt = 1;
 
   public class Foo {
     void foo() {

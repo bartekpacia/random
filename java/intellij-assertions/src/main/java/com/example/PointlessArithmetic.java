@@ -10,10 +10,10 @@ class PointlessArithmetic {
 
   @ApiStatus.OverrideOnly
   final void test(int a) {
-    int i = ZERO * a;
-    int ii = ONE * a;
+    int i = 0;
+    int ii = a;
     int iii = TWO * a; // not pointless, even though we can infer it statically
 
-    int j = TWO - TWO_TOO + a; // Even though TWO and TWO_TOO are equal, they may be quite different semantically. See IDEA-364437
+    int j = a; // Even though TWO and TWO_TOO are equal, they may be quite different semantically. See IDEA-364437
   }
 }
