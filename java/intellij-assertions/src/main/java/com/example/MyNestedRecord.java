@@ -2,36 +2,33 @@ package com.example;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MyNestedRecord {
-
+class SomeClass {
   public static class Problem {
-    private final int myLine;
+    private final int line;
     private final int column;
     private final String code;
     private final String description;
 
     public Problem(int line, int column, @NotNull String code, @NotNull String description) {
-      myLine = line; // aim: see what auto-appends 'this' during rename
+      this.line = line;
       this.column = column;
       this.code = code;
       this.description = description;
     }
 
     public int getLine() {
-      return myLine;
+      return line;
     }
 
     public int getColumn() {
       return column;
     }
 
-    @NotNull
-    public String getCode() {
+    public @NotNull String code() {
       return code;
     }
 
-    @NotNull
-    public String getDescription() {
+    public @NotNull String description() {
       return description;
     }
   }
