@@ -43,3 +43,11 @@ class ProblemOK {
     this.code = code;
   }
 }
+
+public class Delta {
+  public static void main(String[] args) {
+    ProblemOK problemOK = new ProblemOK(21, 37, "lol");
+    System.out.println("line: " + problemOK.myLine + ", column: " + problemOK.myColumn);
+  }
+}
+
