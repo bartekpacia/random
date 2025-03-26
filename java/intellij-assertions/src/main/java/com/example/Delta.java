@@ -2,6 +2,26 @@ package com.example;
 
 import org.jetbrains.annotations.NotNull;
 
+class R0 {
+  final int myFirst;
+  final int mySecond;
+
+  R0(int first, int nothing) {
+    myFirst = first;
+    mySecond = nothing;
+  }
+}
+
+class R4 {
+  final int x;
+  final int y;
+
+  R4(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
 class R1 {
   final int myFirst;
   final int mySecond;
@@ -32,22 +52,13 @@ class Problem {
   }
 }
 
-class ProblemOK {
-  public final int myLine;
-  public final int myColumn;
-  public final @NotNull String code;
-
-  public ProblemOK(int line, int column, @NotNull String code) {
-    myLine = line;
-    myColumn = column;
-    this.code = code;
-  }
+record ProblemOK(int myLine, int myColumn, @NotNull String code) {
 }
 
 public class Delta {
   public static void main(String[] args) {
     ProblemOK problemOK = new ProblemOK(21, 37, "lol");
-    System.out.println("line: " + problemOK.myLine + ", column: " + problemOK.myColumn);
+    System.out.println("line: " + problemOK.myLine() + ", column: " + problemOK.myColumn());
   }
 }
 
