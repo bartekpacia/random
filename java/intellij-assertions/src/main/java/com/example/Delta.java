@@ -12,6 +12,31 @@ class R0 {
   }
 }
 
+final class R20 {
+  final int first;
+  final String second;
+  final int[] third;
+
+  private R20(int first, String second, int... third) {
+    this.first = first;
+    this.second = second;
+    this.third = third;
+  }
+
+  private int first() {
+    return first > 0 ? first : -first;
+  }
+
+  // In preview for this: I expect to see 'getSecond' being renamed to 'second'
+  String getSecond() {
+    return second.length() > 1 ? second : "";
+  }
+
+  private int[] getThird() {
+    return third;
+  }
+}
+
 class R4 {
   final int x;
   final int y;
