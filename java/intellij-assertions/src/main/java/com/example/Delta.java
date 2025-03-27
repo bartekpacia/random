@@ -12,6 +12,51 @@ class R0 {
   }
 }
 
+class R21 {
+  final int myFirst;
+  final int mySecond;
+
+  R21(int myFirst, int second) {
+    this.myFirst = myFirst;
+    mySecond = second;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 final class R20 {
   final int first;
   final String second;
