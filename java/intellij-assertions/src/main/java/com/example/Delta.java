@@ -2,60 +2,11 @@ package com.example;
 
 import org.jetbrains.annotations.NotNull;
 
-class R0 {
-  final int myFirst;
-  final int mySecond;
-
-  R0(int first, int nothing) {
-    myFirst = first;
-    mySecond = nothing;
-  }
+record R0(int myFirst, int mySecond) {
 }
 
-class R21 {
-  final int myFirst;
-  final int mySecond;
-
-  R21(int myFirst, int second) {
-    this.myFirst = myFirst;
-    mySecond = second;
-  }
+record R21(int myFirst, int mySecond) {
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 final class R20 {
   final int first;
@@ -82,24 +33,10 @@ final class R20 {
   }
 }
 
-class R4 {
-  final int x;
-  final int y;
-
-  R4(int x, int y) {
-    this.x = x;
-    this.y = y;
-  }
+record R4(int x, int y) {
 }
 
-class R1 {
-  final int myFirst;
-  final int mySecond;
-
-  R1(int first, int nothing) {
-    myFirst = first;
-    mySecond = nothing;
-  }
+record R1(int myFirst, int mySecond) {
 }
 
 record R2(int myFirst, int mySecond, int myThird) {
