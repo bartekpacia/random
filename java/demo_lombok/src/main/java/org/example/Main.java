@@ -6,8 +6,8 @@ import java.util.List;
 
 @Value
 class User {
-    private String name;
-    private int age;
+    String name;
+    int age;
 
     static int lol;
 }
@@ -19,6 +19,18 @@ class Person {
     private final String city; // redundant because (1) and (2)
 }
 
+class Foo {
+    private int bar;
+    private boolean baz;
+
+    public int getBar() {
+        return bar;
+    }
+
+    public boolean isBaz() {
+        return baz;
+    }
+}
 
 public class Main {
     public static void main(String[] args) {
