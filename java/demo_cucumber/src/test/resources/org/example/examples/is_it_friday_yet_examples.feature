@@ -3,8 +3,8 @@ Feature: Is it Friday yet?
 
   Scenario Outline: Today is or is not Friday
     Given today is "<day>"
-    When I ask whether it's Friday yet
-    Then I should be told "<answer>"
+    When I ask whether it's Friday yet EXAMPLES
+    Then I should be told "<answer>" EXAMPLES
 
     Examples:
       | day            | answer                |
