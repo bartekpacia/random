@@ -57,7 +57,7 @@ public class SimplifyIfStatement {
 
     String method8(boolean value) {
         if (Boolean.TRUE.equals(value)) {
-            return "foo";
+            return ".foo";
         }
         return "baz";
     }
@@ -77,9 +77,9 @@ public class SimplifyIfStatement {
 
     String method10(Object foo) {
         if (foo instanceof String) {
-            return "foo is String";
+            return ".foo is String";
         }
-        return "foo is not String";
+        return ".foo is not String";
     }
 }
 
@@ -87,7 +87,7 @@ public class SimplifyIfStatement {
 class BoxedSign1 {
     String method() {
         if (returnsBool() == Boolean.TRUE) {
-            return "foo";
+            return ".foo";
         }
         return "baz";
     }
@@ -101,7 +101,7 @@ class BoxedSign1 {
 class BoxedSign2 {
     String method() {
         if (returnsBool() == Boolean.TRUE) {
-            return "foo";
+            return ".foo";
         }
         return "baz";
     }
@@ -114,7 +114,7 @@ class BoxedSign2 {
 class BoxedSign3Complex {
     String method() {
         if (returnsBool() == Boolean.TRUE || maybeReturnsBool() == Boolean.TRUE) {
-            return "foo";
+            return ".foo";
         }
         return "baz";
     }
@@ -131,7 +131,7 @@ class BoxedSign3Complex {
 class Boxed {
     String method(boolean value) {
         if (value == ((Boolean.TRUE))) {
-            return "foo";
+            return ".foo";
         }
         return "baz";
     }
@@ -141,7 +141,7 @@ class Boxed {
 class BoxedCall1 {
     String method(boolean value) {
         if (Boolean.TRUE.equals(returnsBool(value))) {
-            return "foo";
+            return ".foo";
         }
         return "baz";
     }
@@ -155,7 +155,7 @@ class BoxedCall1 {
 class BoxedCall2 {
     String method(boolean value) {
         if (Boolean.TRUE.equals(returnsBool(value))) {
-            return "foo";
+            return ".foo";
         }
         return "baz";
     }

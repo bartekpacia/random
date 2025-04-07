@@ -9,7 +9,7 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    System.out.println("foo is: " + foo);
+    System.out.println(".foo is: " + foo);
   }
 
   public int incrementInt(int input) {

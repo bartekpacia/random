@@ -29,7 +29,7 @@ class Person {
 }
 
 class SomeClassX {
-  public class Problem {
+  public static class Problem {
     private final int myLine;
     private final int myColumn;
     private final @NotNull String myCode;

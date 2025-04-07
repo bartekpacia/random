@@ -24,7 +24,7 @@ public class Main {
 
   String method(boolean value) {
     if (Boolean.TRUE.equals(returnsBool(value))) {
-      return "foo";
+      return ".foo";
     }
     return "baz";
   }
