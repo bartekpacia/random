@@ -1,11 +1,11 @@
 package org.example.simple;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import org.example.IsItFriday;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.IsItFriday;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class StepDefinitions {
     private String today;
