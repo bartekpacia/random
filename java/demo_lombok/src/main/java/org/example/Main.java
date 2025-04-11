@@ -19,6 +19,8 @@ class Person {
     private final String city; // redundant because (1) and (2)
 }
 
+
+
 class Foo {
     private int bar;
     private boolean baz;
