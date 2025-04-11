@@ -4,21 +4,21 @@ fun main() {
     val world = world {
         val lisbon = village("Lisbon") {
             population = 1_000_000
-            house("MEO Arena")
-            house("Bridge of 25th April")
+            place("MEO Arena")
+            place("Bridge of 25th April")
         }
 
         val porto = village("Porto") {
             population = 500_000
-            house("Sé do Porto")
-            house("Ribeira")
-            house("FEUP")
+            place("Sé do Porto")
+            place("Ribeira")
+            place("FEUP")
         }
 
         val braga = village("Braga") {
             population = 100_000
-            house("Bom Jesus do Monte")
-            house("Santa Barbara Garden")
+            place("Bom Jesus do Monte")
+            place("Santa Barbara Garden")
 
             // WARNING: A loophole!
             // This seems wrong, right?
@@ -42,10 +42,6 @@ fun main() {
 @Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
 annotation class WorldDsl
 
-@DslMarker
-@Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
-annotation class VillageDsl
-
 fun world(init: WorldBuilder.() -> Unit): World {
     return WorldBuilder().apply(init).build()
 }
@@ -53,42 +49,38 @@ fun world(init: WorldBuilder.() -> Unit): World {
 @WorldDsl
 class WorldBuilder {
     // Holds state so we can incrementally build up the world.
-    internal val villages = mutableListOf<Village>()
-    internal val roads = mutableListOf<Road>()
+    private val villages = mutableListOf<Village>()
+    private val roads = mutableListOf<Road>()
 
     fun build(): World = World(villages, roads)
-}
 
-fun WorldBuilder.village(name: String, init: VillageBuilder.() -> Unit): Village {
-    val builder = VillageBuilder(name).apply(init)
-    val village = builder.build()
-    villages += village
-    return village
-}
+    fun village(name: String, init: VillageBuilder.() -> Unit): Village {
+        val builder = VillageBuilder(name).apply(init)
+        val village = builder.build()
+        villages += village
+        return village
+    }
 
-fun WorldBuilder.road(from: Village, to: Village) {
-    roads += Road(from, to)
+    fun road(from: Village, to: Village) {
+        roads += Road(from, to)
+    }
 }
 
 @WorldDsl
 class VillageBuilder(private val name: String) {
     var population: Int = 0
-    private val houses = mutableListOf<Place>()
+    private val places = mutableListOf<Place>()
 
-    fun house(name: String) {
-        houses += Place(name)
+    fun place(name: String) {
+        places += Place(name)
     }
 
-    fun build(): Village = Village(name, population, houses)
+    fun build(): Village = Village(name, population, places)
 }
-
-fun
 
 //region Data model
 
-        data
-
-class World(
+data class World(
     val villages: List<Village>,
     val roads: List<Road>,
 ) {
@@ -103,11 +95,11 @@ class World(
 }
 
 data class Village(
-    val name: String, val population: Int, val houses: List<Place>
+    val name: String, val population: Int, val places: List<Place>
 ) {
     override fun toString(): String {
-        val houseList = houses.joinToString { it.name }
-        return " - $name (pop: $population), houses: [$houseList]"
+        val placeList = places.joinToString { it.name }
+        return " - $name (pop: $population), houses: [$placeList]"
     }
 }
 
