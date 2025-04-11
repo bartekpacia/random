@@ -13,14 +13,6 @@ Talk with 2 parts:
 Now, mobile development is known for requiring much heavier tooling than
 frontend – so I'll introduce myself real quick, then we'll quickly download
 Android Studio, and in the meantime I'll say a bit about JetBrains.
-
-### About JetBrains
-
-We have internships.
-It's quite unfortunate because they just finished last week.
-Please sign up for a new edition 
-- We're looking for a student ambassador at FEUP
-
 ## 00:10 – 00:30 — Kotlin Basics (Fast-Paced)
 
 Use Kotlin by Example for it: https://play.kotlinlang.org/byExample
@@ -38,13 +30,20 @@ Special Classes > Sealed Classes
 
 > Keep it tight — goal is just familiarity, not mastery.
 
-# Part 2 (internals)
 
-But don't you wonder how does it actually work? 
 
-We just a bunch of function, these functions don't return anything.
-But yet something is rendered on the screen, and in a very fast, optimized way.
-How does it actually work?
+Pro-tips:
 
-Now, brace yourselves.
+- Read documentation – hover over functions!
+
+
+Basic layout blocks:
+- Text
+- Button
+- Column/Row
+  - layout algorithm very similar to Flutter
+
+- Basic styling with Modifier
+
+
 

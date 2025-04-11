@@ -7,7 +7,7 @@ fun main() {
     val lisbon = Village(
         name = "Lisbon",
         population = 1_000_000,
-        houses = listOf(
+        places = listOf(
             Place("MEO Arena"),
             Place("Bridge of 25th April"),
         ),
@@ -16,7 +16,7 @@ fun main() {
     val porto = Village(
         name = "Porto",
         population = 500_000,
-        houses = listOf(
+        places = listOf(
             Place("Sé do Porto"),
             Place("Ribeira"),
             Place("FEUP"),
@@ -26,7 +26,7 @@ fun main() {
     val braga = Village(
         name = "Braga",
         population = 100_000,
-        houses = listOf(
+        places = listOf(
             Place("Bom Jesus do Monte"),
             Place("Santa Barbara Garden"),
         ),
