@@ -6,7 +6,7 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     Main main = new Main();
-    main.funAlpha();
+    main.funAlpha(2);
   }
 
   private void funAlpha(int x) {
