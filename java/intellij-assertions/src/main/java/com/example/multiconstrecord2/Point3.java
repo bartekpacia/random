@@ -1,31 +1,38 @@
 package com.example.multiconstrecord2;
 
-/* Before
-class Point3 {
+class Point2_broken {
+  final double x;
+  final double y;
+
+  Point2_broken(double x, double y) {
+    this.x = x;
+    this.y = s;
+  }
+}
+
+class Point2_class {
   private final double x;
   private final double y;
 
-  Point3(double x) {
+  Point2_class(double x) {
     this.x = x;
     this.y = 0;
   }
 
-  Point3(double x, double y) {
+  Point2_class(double x, double y) {
     this.x = x;
     this.y = y;
   }
 }
 
-*/
-
-record Point2(double x, double y) {
+record Point2_record(double x, double y) {
   // Compact constructor for validation or custom logic
-  Point2 {
+  Point2_record {
     System.out.println("using 2-arg constructor");
   }
 
   // Custom constructor for one argument
-  Point2(double x) {
+  Point2_record(double x) {
     this(x, 0); // delegate to the canonical constructor
     System.out.println("using 1-arg constructor");
   }
