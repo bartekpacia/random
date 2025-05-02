@@ -5,7 +5,7 @@ class Person {
   final int age;
 
   Person(String myName, int myAge) {
-    this.name = myName;
-    this.age = myAge;
+    name = myName;
+    age = myAge;
   }
 }
