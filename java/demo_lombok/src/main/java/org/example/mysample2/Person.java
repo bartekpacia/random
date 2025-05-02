@@ -1,13 +1,13 @@
 package org.example.mysample2;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.Value;
-import lombok.experimental.FieldDefaults;
 
 import java.util.Objects;
 
@@ -18,15 +18,49 @@ public class Person {
     }
 }
 
-@AllArgsConstructor
-class Person1 {
-    final String name;
-    final int age;
+@NoArgsConstructor
+class Person_A {
+    String name;
+    int age;
 
-    public Person1(String name, int age) {
+    Person_A() {}
+}
+
+@RequiredArgsConstructor
+class Person_B {
+    final String name;
+    int age;
+
+    public Person_B(String name) {
+        this.name = name;
+    }
+}
+
+@AllArgsConstructor
+class Person_C {
+    String name;
+    int age;
+
+    public Person_C(String name, int age) {
         this.name = name;
         this.age = age;
     }
+}
+
+@Getter
+@ToString
+class Person_D {
+    String name;
+    int age;
+
+    @Override
+    public String toString() {
+        return "Person_D{name='" + name + "', age=" + age + '}';
+    }
+
+}
+
+record Person1(String name, int age) {
 
     public String getName() {
         return name;
@@ -61,7 +95,6 @@ class Person2 {
     }
 }
 
-@ToString
 class Person3 {
     final String name;
     final int age;
@@ -82,10 +115,26 @@ class Person3 {
     }
 }
 
-@AllArgsConstructor
+@Data
 record Person4(String name, int age) {
 }
 
+@Data
+class R {
+    private final Object a;
+    private final String b;
+    private final int c;
+    private final double d;
+    private final float e;
+    private final int[] arr;
+}
+
 @Value
-record Person5(String name, int age) {
+record Person6(String name, int age) {
+}
+
+@Value
+class Person7 {
+    String name;
+    int age;
 }

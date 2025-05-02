@@ -1,18 +1,32 @@
 package com.example.multiconstrecord2;
 
+import java.util.Objects;
+
 class Point2_broken {
   final double x;
   final double y;
 
   Point2_broken(double x, double y) {
     this.x = x;
-    this.y = s;
+    this.y = 2;
+  }
+}
+
+class R {
+  final int x;
+  final int y;
+  final int z;
+
+  R(int x, int y) {
+    this.x = x;
+    this.y = y;
+    this.z = 10;
   }
 }
 
 class Point2_class {
-  private final double x;
-  private final double y;
+  final double x;
+  final double y;
 
   Point2_class(double x) {
     this.x = x;
@@ -38,31 +52,30 @@ record Point2_record(double x, double y) {
   }
 }
 
-/* Before
-class Point3 {
-  private final double x;
-  private final double y;
-  private final double z;
+//Before
+class Point3_class {
+  final double x;
+  final double y;
+  final double z;
 
-  Point3(double x) {
+  Point3_class(double x) {
     this.x = x;
     this.y = 0;
     this.z = 0;
   }
 
-  Point3(double x, double y) {
+  Point3_class(double x, double y) {
     this.x = x;
     this.y = y;
     this.z = 0;
   }
 
-  Point3(double x, double y, double z) {
+  Point3_class(double x, double y, double z) {
     this.x = x;
     this.y = y;
     this.z = z;
   }
 }
-*/
 
 record Point3(double x, double y, double z) {
   Point3(double x) {
@@ -85,7 +98,7 @@ record Point3(double x, double y, double z) {
   }
 
   // Compact canonical constructor
-  // Point3 {
+  // Test {
   //   System.out.println("Point is created!");
   // }
 }
