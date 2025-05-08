@@ -1,6 +1,7 @@
 plugins {
     id("application")
     id("java")
+    id("org.jetbrains.kotlin.jvm")
 }
 
 group = "org.example"
@@ -23,6 +24,7 @@ dependencies {
     testImplementation("io.cucumber:cucumber-java")
     testImplementation("io.cucumber:cucumber-junit")
     testImplementation("io.cucumber:cucumber-junit-platform-engine")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
@@ -31,4 +33,8 @@ tasks.test {
     testLogging {
         showStandardStreams = true
     }
+}
+
+kotlin {
+    jvmToolchain(23)
 }
