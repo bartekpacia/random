@@ -30,8 +30,8 @@ class StepDefinitionsKt {
         wantedMonth = IsItFriday.isItFriday(currentMonth)
     }
 
-    @Then("I should be told {string}")
-    fun i_should_be_told(expectedAnswer: String?) {
+    @Then("I am told {string}")
+    fun blah(expectedAnswer: String?) {
         Assertions.assertThat(wantedMonth).isEqualTo(expectedAnswer)
     }
 }

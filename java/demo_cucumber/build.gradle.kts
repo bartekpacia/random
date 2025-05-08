@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+
 plugins {
     id("application")
     id("java")
-    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.jvm") version "2.1.20"
 }
 
 group = "org.example"
@@ -36,5 +39,7 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(23)
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_23
+    }
 }
