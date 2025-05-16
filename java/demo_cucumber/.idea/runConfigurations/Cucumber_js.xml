@@ -1,9 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Cucumber.js" type="cucumber.js" factoryName="Cucumber.js">
-    <option name="myFilePath" value="$PROJECT_DIR$/src/test/resources/org/example/simple/is_it_friday_yet_simple.feature" />
-    <option name="myNameFilter" value="^Friday is Friday$" />
-    <option name="cucumberJsArguments" value="" />
-    <option name="workingDirectory" value="$PROJECT_DIR$" />
-    <method v="2" />
-  </configuration>
-</component>
