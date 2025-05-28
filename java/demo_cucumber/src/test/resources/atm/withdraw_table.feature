@@ -2,7 +2,7 @@ Feature: Withdraw money (table-based)
 
   Some description
 
-  Scenario Outline: Withdrawing money subtracts correct amount
+  Scenario Outline: Withdrawing money subtracts correct amount (start: <start>)
     Given I have <start> EUR on my account
     When I withdraw <subtract_amount> EUR
     Then My account has <end> EUR left
