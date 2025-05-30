@@ -4,7 +4,7 @@
     <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/atm/withdraw.feature" />
     <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
     <module name="democucumber" />
-    <option name="PROGRAM_PARAMETERS" value=" --plugin teamcity" />
+    <option name="PROGRAM_PARAMETERS" value=" --plugin teamcity --glue atm" />
     <shortenClasspath name="NONE" />
     <option name="SUGGESTED_NAME" value="Feature: withdraw" />
     <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
