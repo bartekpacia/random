@@ -14,12 +14,11 @@ public class Steps {
 
     @Given("{word} inspection is enabled")
     public void inspectionIsEnabled(String inspectionName) {
-
     }
 
-    @When("^I expect inspection on <([^>]+)> with some message$")
-    public void iExpectInspectionsOnWithMessages(String level, String signature) {
-        System.out.println("level = " + level + ", signature = " + signature);
+    @When("^I expect inspection (error|warning|info|TYPO|weak warning) on <([^>]+)> with messages$")
+    public void iExpectInspectionsOnWithMessages(String level, String signature, String messages) {
+        System.out.println("level = " + level + ", signature = " + signature + ", messages = " + messages);
     }
 
     @Given("I check highlighting weak warnings")

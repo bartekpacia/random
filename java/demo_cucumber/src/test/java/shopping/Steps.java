@@ -1,23 +1,19 @@
-package atm;
+package shopping;
 
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
-import io.cucumber.java8.En;
 
-public class RegexSteps implements En {
-    public RegexSteps() {
-        Given("my java8 step", () -> System.out.println("step"));
-    }
+public class Steps {
 
     @Given("my step definition")
     public void my_step_definition() {
     }
-    @Given("my another step definition with param <{word}> - cukexp")
 
+    @Given("my another step definition with param {string}")
     public void my_another_step_definition(String param) {
     }
 
-    @Given("my another step definition with param {word} - regex")
+    @Given("my another step definition with param <{string}> but regex based")
     public void my_another_step_definition_regex_based(String param) {
     }
 
@@ -25,10 +21,10 @@ public class RegexSteps implements En {
     public void my_step_with_colon(String param) {
     }
 
-    @Given("first regex")
-    @Given("second regex")
-    public void my_double_definition() {
-    }
+//    @Given("first regex")
+//    @Given("second regex")
+//    public void my_double_definition() {
+//    }
 
     @Given("step {color}")
     public void colorParameterType() {
