@@ -26,11 +26,6 @@ Feature: Withdraw money
     And error message about the lack of money is displayed
     And I am angry
 
-  @allure.id:2048
-  @moved_to_pcwf
-  @allure.label.epic:MP-11487
-  @allure.label.testType:positive
-  @allure.label.service:pc
   Scenario: Withdraw negative amount from the account
     Given I have 70 EUR on my account
     When I withdraw -1 EUR

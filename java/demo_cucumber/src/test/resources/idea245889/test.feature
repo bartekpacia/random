@@ -1,7 +1,7 @@
 Feature: IDEA-245889 reproducer
 
   Scenario Outline: Multiline string argument in execution section (warning on subexpression)
-    Given a snakemake project
+    Given a snakemake projectXD
     Given I open a file "foo.smk" with text
     """
     <rule_like> NAME:

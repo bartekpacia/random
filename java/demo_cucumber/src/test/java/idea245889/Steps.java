@@ -14,6 +14,7 @@ public class Steps {
 
     @Given("{word} inspection is enabled")
     public void inspectionIsEnabled(String inspectionName) {
+
     }
 
     @When("^I expect inspection (error|warning|info|TYPO|weak warning) on <([^>]+)> with messages$")
@@ -23,5 +24,11 @@ public class Steps {
 
     @Given("I check highlighting weak warnings")
     public void checkHighlighting() {
+    }
+
+    @Given("a snakemake projectXD")
+    public void aSnakemakeProjectXD() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
     }
 }
