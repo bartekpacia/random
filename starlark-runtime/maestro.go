@@ -44,7 +44,7 @@ func launchAppFunc(
 	// return nothing, instead modify internal commands state
 
 	commands = append(commands, map[string]string{
-		"launchApp"
+		"launchApp": appID,
 	})
 
 	return starlark.None, nil
