@@ -39,14 +39,6 @@ record R4(int x, int y) {
 record R1(int myFirst, int mySecond) {
 }
 
-record R2(int myFirst, int mySecond, int myThird) {
-  R2(int myFirst, int mySecond, int myThird) {
-    this.myFirst = myFirst;
-    this.mySecond = mySecond;
-    this.myThird = idk; // unresolved symbol, but we still can convert
-  }
-}
-
 class Problem {
   public final int myLine;
   public final @NotNull String code;
