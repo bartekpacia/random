@@ -13,38 +13,34 @@ public class WithdrawSteps {
     }
 
     @When("^I withdraw (-?\\d+) EUR$")
-    public void withdraw_EUR(int EUR) {
+    public void withdraw_EUR(int EUR) throws Throwable {
     }
 
     @Then("I get {int} EUR from the ATM")
-    public void i_get_EUR_from_the_ATM(int EUR) {
+    public void i_get_EUR_from_the_ATM(int EUR) throws Throwable {
     }
 
     @Then("error message about the lack of money is displayed")
-    public void error_message_about_the_lack_of_money_is_displayed() {
+    public void error_message_about_the_lack_of_money_is_displayed() throws Throwable {
     }
 
     @Then("My account has {int} EUR left")
-    public void my_account_has_EUR_left(int EUR) {
+    public void my_account_has_EUR_left(int EUR) throws Throwable {
     }
 
     @Then("error message about incorrect amount is displayed")
-    public void error_message_about_incorrect_amount_is_displayed() {
+    public void error_message_about_incorrect_amount_is_displayed() throws Throwable {
     }
 
     @Then("I am happy")
-    public void i_am_happy() {
+    public void i_am_happy() throws Throwable {
     }
 
     @Then("^I am angry$")
-    public void i_am_angry() {
+    public void i_am_angry() throws Throwable {
     }
 
-    @Given("I don't have any euro(s) on my account")
-    public void I_dont_have_any_euros(int euros) {
-    }
-
-    @Then("I have single/many emotion(s)")
-    public void I_have_emotions() {
+    @Then("I have {int} feeling(s)")
+    public void i_have_feelings() throws Throwable {
     }
 }
