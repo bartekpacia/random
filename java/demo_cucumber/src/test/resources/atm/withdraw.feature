@@ -38,7 +38,7 @@ Feature: Withdraw money
     Given I don't have any euros on my account
     When I withdraw 1 EUR
     Then error message about the lack of money is displayed
-    And I have single/many emotions
+    And I have many emotion
 
 # 1. Expected: I have {single/many} emotions -> TAB
 # 2. Expected: I have |
