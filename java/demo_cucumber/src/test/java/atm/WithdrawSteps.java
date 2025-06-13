@@ -32,15 +32,24 @@ public class WithdrawSteps {
     public void error_message_about_incorrect_amount_is_displayed() throws Throwable {
     }
 
+    @When("I am dumb")
     @Then("I am happy")
     public void i_am_happy() throws Throwable {
     }
 
-    @Then("^I am angry$")
+    @Then("^I am angry very$")
     public void i_am_angry() throws Throwable {
     }
 
     @Then("I have {int} feeling(s)")
+    public void i_have_feelings(int a) throws Throwable {
+    }
+
+    @Then("I have none/few/many feeling(s) about this/that")
     public void i_have_feelings() throws Throwable {
+    }
+
+    @Then("I have {int} {word} feeling(s) uh")
+    public void i_have_feelings2(int a, String b) throws Throwable {
     }
 }

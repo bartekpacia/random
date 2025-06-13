@@ -9,6 +9,7 @@ Feature: Withdraw money
     Then I get 100 EUR from the ATM
     And My account has 100 EUR left
     And I am happy
+    And I am dumb
 
   # Same as the previous scenario, but with different amounts.
   Scenario: Withdraw less money than the account has
@@ -24,8 +25,10 @@ Feature: Withdraw money
     Then I get 0 EUR from the ATM
     And My account has 50 EUR left
     And error message about the lack of money is displayed
-    And I am angry
+    And I am angry very
     And I have 1 feeling
+    And I have 42 nice feelings uh
+    And I have few feelings about that
 
   Scenario: Withdraw negative amount from the account
     Given I have 50 EUR on my account
@@ -33,5 +36,5 @@ Feature: Withdraw money
     Then I get 0 EUR from the ATM
     And My account has 50 EUR left
     And error message about incorrect amount is displayed
-    And I am angry
+    And I am angry very
     And I have 7 feelings
