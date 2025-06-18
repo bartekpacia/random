@@ -43,8 +43,8 @@ public class WithdrawSteps {
     public void i_have_feelings(int a) {
     }
 
-    @Then("I have none/few/many feeling(s) about this/that")
-    public void i_have_feelings() {
+    @Then("I have no/few/many feeling(s) about this/that")
+    public void i_have_feelings2() {
     }
 
     @Then("I have {int} {word} feeling(s) uh")
