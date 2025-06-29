@@ -7,7 +7,7 @@ public class Steps {
     public void butchering_cpu(String arg) {
     }
 
-    @When("^(a+)+B$")
+    @When("^cpu (a+)+B$")
     public void owasp_sample(String arg) {
     }
 }
