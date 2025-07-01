@@ -10,6 +10,7 @@
   <name>demo_cucumber</name>
 
   <properties>
+    <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
