@@ -17,9 +17,9 @@ Feature: IDEA-245889 reproducer
       | field  |
 
   Scenario Outline: Some title 3
-    Given I expect inspection warning on <<<type>>> with messages 3
+    Given I expect inspection warning on <<<typeok>>> with messages 3
     Examples:
-      | type   |
+      | typeok |
       | class  |
       | method |
       | field  |

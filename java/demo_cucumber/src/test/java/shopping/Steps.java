@@ -9,9 +9,9 @@ public class Steps {
     public void my_step_definition() {
     }
 
-    @Given("my another step definition with param {string}")
-    public void my_another_step_definition(String param) {
-    }
+//    @Given("my another step definition with param {string}")
+//    public void my_another_step_definition(String param) {
+//    }
 
     @Given("my another step definition with param <{string}> but regex based")
     public void my_another_step_definition_regex_based(String param) {
