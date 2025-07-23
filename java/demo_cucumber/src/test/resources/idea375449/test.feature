@@ -19,7 +19,15 @@ Feature: Some feature
       | field  |
 
   Scenario Outline: Some title 3
-    Given I expect inspection warning on <<<type>>> with messages 3
+    Given I expect inspection warning on < <<type>>> with messages 3
+    Examples:
+      | type   |
+      | class  |
+      | method |
+      | field  |
+
+  Scenario Outline: Some title 4
+    Given I expect inspection warning on <<<type>>> with messages 4
     Examples:
       | type |
       | class  |
