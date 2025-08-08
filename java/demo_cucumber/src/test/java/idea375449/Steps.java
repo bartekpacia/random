@@ -1,5 +1,6 @@
 package idea375449;
 
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 
 public class Steps {
@@ -21,5 +22,14 @@ public class Steps {
 
     @Given("my another step definition with param {string}")
     public void my_another_step_definition(String param) {
+    }
+
+
+    @Given("I have <t.* {int}> tomatos")
+    public void a_crazy_one(int arg0) {
+    }
+
+    @Given("I have {word} tomatos")
+    public void a_crazy_one(String param) {
     }
 }
