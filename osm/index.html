@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>OSM Tile Server Test</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+      #map {
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      const map = L.map("map").setView([50.19567, 18.44665], 13);
+      L.tileLayer("http://[twój_adres_IP]:[port]/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution:
+          'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+    </script>
+  </body>
+</html>
