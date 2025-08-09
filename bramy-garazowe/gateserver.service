@@ -1,0 +1,19 @@
+[Unit]
+Description=Simple HTTP server to control modified gate pilots
+After=network-online.target
+Wants=network-online.target
+#StartLimitIntervalSec=60
+#StartLimitBurst=3
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python %h/Desktop/gateserver.py
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=default.target
+
+# Remember:
+# - install as user service, so %h specifier can be used
+# - enable lingering (loginctl enable-linger) to avoid death on logout
