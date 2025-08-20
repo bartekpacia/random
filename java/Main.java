@@ -1,21 +1,13 @@
 public class Main {
-	public static void main(String[] args) {
-		printNums(2, 1, 3, 7);
-	}
-
-	public static void printNums(int ... nums) {
-		for (int i = 0; i < nums.length; i++) {
-			System.out.println("number at index " + i + " is " + nums[i]);
-		}
-		Flubber.a();
-	}
-
-	
-}
-
-class Flubber {
-	@Deprecated
-		public static void a() {
-			
-		} 
+    public class Nested {
+        public static void main(String[] args) {
+            System.out.printf("Hello and welcome!");
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("i = " + i);
+                int a = i + 1;
+                System.out.println(a);
+            }
+            return;
+        }
+    }
 }
