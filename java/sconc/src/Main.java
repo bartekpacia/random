@@ -1,8 +1,9 @@
-public class Main {
-    public static class NestedXD {
-        public static void main(String[] args) throws InterruptedException {
-            System.out.println("Hello world");
-            Thread.sleep(1_000);
-        }
+import static java.nio.charset.StandardCharsets.*;
+
+class Test {
+    void test(byte[] bytes) throws Exception {
+        String string = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+        System.out.println(string);
+        string.getBytes(UTF_8);
     }
 }

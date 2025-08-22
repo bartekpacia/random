@@ -17,7 +17,7 @@ dependencies {
     testImplementation("org.hamcrest:hamcrest:3.0")
 
     // JUnit 4
-    testImplementation("junit:junit:4.13")
+    testImplementation("junit:junit:4.13.1")
 
     // AssertJ
     testImplementation("org.assertj:assertj-core:3.26.3")
