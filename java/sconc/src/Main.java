@@ -1,9 +1,23 @@
 import static java.nio.charset.StandardCharsets.*;
 
-class Test {
-    void test(byte[] bytes) throws Exception {
-        String string = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
-        System.out.println(string);
-        string.getBytes(UTF_8);
+class Main {
+
+    String testSwitch() {
+        BaseInterface k = new BaseInterface.Record1();
+        int i2 = 0;
+        return switch () {
+            case BaseInterface.Record1 record1 -> "1";
+            case BaseInterface.Record2 record2 -> "2";
+            default -> "3";
+        };
+    }
+
+    sealed interface BaseInterface permits BaseInterface.Record1, BaseInterface.Record2{
+
+        record Record1() implements BaseInterface {
+        }
+
+        record Record2() implements BaseInterface {
+        }
     }
 }

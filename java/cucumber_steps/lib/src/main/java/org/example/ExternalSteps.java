@@ -1,5 +1,6 @@
 package org.example;
 
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,5 +20,14 @@ public class ExternalSteps {
 
     @Then("I have {int} cucumber(s) in my belly")
     public void i_have_cucumbers_in_my_belly(int cukes) {
+    }
+
+    @Then("I have {colorName} cucumber")
+    public void i_have_colorful_cucumber(Color color) {
+    }
+
+    @ParameterType("red|green|blue")
+    Color colorName(String name) {
+        return Color.valueOf(name);
     }
 }

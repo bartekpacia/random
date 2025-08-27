@@ -5,7 +5,7 @@
 //}
 
 class Main {
-    public static class Nes$ted {
+    public static class Nested {
         public static void main() {
             System.out.println("Wrapped Hello World");
         }
