@@ -3,7 +3,7 @@ package records;
 public class Main {
     public static void main(String[] args) {
         Person p = new Person("John", 25);
-        System.out.println("Name is " + p.getName() + " and age is " + p.getAge());
+        System.out.println("Name is " + p.getName());
     }
 }
 
@@ -11,17 +11,13 @@ class Person {
     private final String name;
     private final int age;
 
-    Person(String name, int age) {
-        this.name = name;
+    Person(CharSequence charSequence, int age) {
+        this.name = charSequence.toString().trim();
         this.age = age;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getAge() {
-        return age;
     }
 }
 
