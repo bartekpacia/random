@@ -2,8 +2,14 @@ package records;
 
 public class Main {
     public static void main(String[] args) {
-        Person p = new Person("John", 25);
-        System.out.println("Name is " + p.getName());
+        Person p1 = new Person("John", 25);
+        System.out.println("1st person is named " + p1.name());
+
+        Person p2 = new Person("Paul", 42);
+        System.out.println("2nd person's name is " + p2.name());
+
+        Person p3 = new Person((CharSequence) "Paul", 42);
+        System.out.println("3rd person!!!");
     }
 }
 
@@ -16,9 +22,14 @@ class Person {
         this.age = age;
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
+
+    public int age() {
+        return age;
+    }
+
 }
 
 // Case where semantics changes: 

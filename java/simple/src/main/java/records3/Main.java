@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         // T is instantiated as String
         List<String> stringList = new ArrayList<>();
-        new Selector<>(stringList);
+        new Selector<>((Collection<String>)stringList);
 
         List<Integer> integerList = new ArrayList<>();
         new Selector<>(integerList);
@@ -16,11 +16,11 @@ public class Main {
 }
 
 class Selector<T> {
-    private final List<String> internalStorage;
+    private final List<String> contents;
 
     // Constructor 1: Takes a generic collection based on the class's type parameter T
-    Selector(Collection<T> coll) {
-        this.internalStorage = coll.stream().map(Object::toString).toList();
+    Selector(Collection<T> collection) {
+        this.contents = collection.stream().map(Object::toString).toList();
         System.out.println("-> Constructor(Collection<T>) was called.");
     }
 
