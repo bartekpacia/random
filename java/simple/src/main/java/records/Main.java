@@ -12,7 +12,10 @@ public class Main {
         System.out.println("2nd person's name is " + p2.name());
 
         Person p3 = new Person((CharSequence) "Paul", 42);
-        System.out.println("3rd person!!!");
+        System.out.println("3rd person!!!" + p3);
+
+        Person p4 = new Person(10);
+        System.out.println("4th person is " + p4);
     }
 }
 
