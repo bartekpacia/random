@@ -5,32 +5,26 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Person p = new Person("John", 25, new ArrayList<>());
+        // Person p = new Person("John", 25, new ArrayList<>());
         System.out.println("Name is " + p.getName());
     }
 }
 
-class Person<T> {
-    private final String name;
-    private final int age;
-    private final ArrayList<? extends T> ARR_LIST;
+class Person {
+    final String name;
+    final int age;
 
-    Person(CharSequence DUPA, int age, List<? extends T> t) {
-        this.name = DUPA.toString();
+    Person(String name, int age) {
+        this.name = name;
         this.age = age;
-        this.ARR_LIST = new ArrayList<>(t);
     }
 
-    public String getName() {
-        return name;
+    Person(String name) {
+        this.name = name;
+        this.age = 42;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", t=" + ARR_LIST +
-                '}';
+    Person(int age) {
+        this("Unknown", age);
     }
 }
