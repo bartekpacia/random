@@ -2,6 +2,9 @@ package records;
 
 public class Main {
     public static void main(String[] args) {
+        // Q: How to know that this specific call resolved to Person(CharSequence, int), but now resolves to Person(String, int)?
+        // A:
+
         Person p1 = new Person("John", 25);
         System.out.println("1st person is named " + p1.name());
 
@@ -20,6 +23,10 @@ class Person {
     Person(CharSequence charSequence, int age) {
         this.name = charSequence.toString().trim();
         this.age = age;
+    }
+
+    Person(int age) {
+        this("Unknown", age);
     }
 
     public String name() {
