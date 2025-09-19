@@ -1,0 +1,22 @@
+package steps;
+
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class Steps4064 {
+    @When("^the step is implemented4064$")
+    public void implementedStep4064() {
+    }
+
+    @Then("^the next step is executed4064$")
+    public void passedStep4064() {
+    }
+
+    @When("^the step is not implemented yet4064$")
+    public void notImplementedStep4064() {
+    }
+
+    @Then("^the next step is skipped4064$")
+    public void skippedStep4064() {
+    }
+}
