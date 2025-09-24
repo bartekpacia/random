@@ -1,7 +1,7 @@
 import os
 
 # Configuration
-NUM_FILES = 5000
+NUM_FILES = 25_000
 OUTPUT_DIR = 'src/test/java/steps/'
 
 # Ensure the output directory exists
