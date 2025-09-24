@@ -9,6 +9,7 @@ public class Steps {
 
     @Given("I am hungry")
     public void iAmHungry() {
+        // no-op
     }
 
     @When("I ask for advice")
