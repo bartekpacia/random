@@ -1,0 +1,21 @@
+### Cucumber
+Behavior Driven Development (BDD)
+https://cucumber.io
+
+contrib/cucumber
+contrib/cucumber-java
+contrib/cucumber-groovy
+and more... JavaScript, Ruby
+
+
+[x] Gherkin intro: Feature/ScenarioGiven/When/
+[ ] Step definitions
+  [x] Regular expressions (regex)
+  [ ]  Cucumber expressions (cukex)
+    [ ] custom parameter types (navigate to/from, TODO: rename)
+  [ ] Annotation style (navigate to/from, rename)
+  [ ] Java 8 style (navigate to/from, rename)
+[ ] Multiple languages (in Gherkin and Java)
+
+
+### Example custom parameter type
