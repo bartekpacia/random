@@ -9,5 +9,5 @@ Project for testing performance of the IntelliJ Cucumber plugin.
 
 ### Java
 
-25 000 Java step definition files, each file defines 4 steps.
-100 000 total step definitions.
+10 000 Java step definition files, each file defines 4 steps in Java annotation style.
+40 000 total step definitions.
