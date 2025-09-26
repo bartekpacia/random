@@ -1,5 +1,5 @@
 package org.example;
 
-enum Color {
+public enum Color {
     RED, GREEN, BLUE
 }

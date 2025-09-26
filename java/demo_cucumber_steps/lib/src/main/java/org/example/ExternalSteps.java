@@ -1,15 +1,11 @@
-package en;
+package org.example;
 
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
-import io.cucumber.java8.En;
 
-public class Steps implements En {
-
-    public Steps() {
-        // TODO: step parameters don't work!
-        ParameterType("name", ".*", (String name) -> name);
-        ParameterType("name", ".*", (String name) -> name);
+public class ExternalSteps {
+    public boolean someLibraryMethod() {
+        return true;
     }
 
     @Given("I am {word}")
@@ -25,11 +21,11 @@ public class Steps implements En {
     }
 
     @Given("I have this/that parameter")
-    public void alternative(String size) {
-    }
+    public void alternative() {
 
+    }
     @Given("I have or not( parameter)")
-    public void optional(String size) {
+    public void optional() {
     }
 
     @ParameterType(".*")
@@ -37,4 +33,3 @@ public class Steps implements En {
         return arg;
     }
 }
-
