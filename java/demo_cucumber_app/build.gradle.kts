@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 }
 
-val libJar = files("../demo_cucumber_steps/lib/build/libs/lib.jar")
+val libJar = files("../demo_cucumber_steps/target/steps-1.0.0.jar")
 if (libJar.asFileTree.isEmpty) {
     throw RuntimeException("JAR doesn't exist: ${libJar.files}")
 }
