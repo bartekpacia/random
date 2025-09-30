@@ -20,5 +20,12 @@
             <artifactId>cucumber-java</artifactId>
             <version>7.29.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.deepexample</groupId>
+            <artifactId>steps_superdeep</artifactId>
+            <scope>system</scope>
+            <systemPath></systemPath>
+        </dependency>
     </dependencies>
 </project>
