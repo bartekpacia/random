@@ -5,6 +5,5 @@ Feature: Already implemented.
     Then the next step is executed3222
 
   Scenario:
-    When the step is implemented3d
+    When the step is implemented3222
     Then the next step is executed3222
-    When the step is implemented3234

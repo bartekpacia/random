@@ -2,13 +2,12 @@ import os
 
 # Configuration
 NUM_FILES = 5_000
-OUTPUT_DIR = 'src/resources/'
+OUTPUT_DIR = 'src/test/resources/'
 
 # Ensure the output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-FILE_TEMPLATE = """
-Feature: Already implemented.
+FILE_TEMPLATE = """Feature: Already implemented.
 
   Scenario:
     When the step throws an exceptionNUM
