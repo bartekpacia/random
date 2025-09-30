@@ -7,8 +7,7 @@ OUTPUT_DIR = 'src/test/java/steps/'
 # Ensure the output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Java file template
-JAVA_TEMPLATE = """package steps;
+FILE_TEMPLATE = """package steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -39,7 +38,7 @@ for i in range(1, NUM_FILES + 1):
     file_path = os.path.join(OUTPUT_DIR, file_name)
 
     with open(file_path, 'w') as f:
-        content = JAVA_TEMPLATE.replace("NUM", str(i))
+        content = FILE_TEMPLATE.replace("NUM", str(i))
         f.write(content)
         print(f"Wrote file {file_path}")
 

@@ -2,6 +2,19 @@
 
 Project for testing performance of the IntelliJ Cucumber plugin.
 
+Regenerate Gherkin files:
+
+```
+python generate_gherkin_files.py
+```
+
+Regenerate Java files:
+
+```python
+python generate_stepdef_files.py
+```
+
+
 ### Gherkin
 
 5 000 Gherkin feature files, each with 2 scenarios, each scenario with 2 steps
