@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Person p = new Person("John", 25, new ArrayList<>());
-        System.out.println("Name is " + p.getName());
+//        Person p = new Person("John", 25, new ArrayList<>());
+//        System.out.println("Name is " + p.getName());
     }
 }
 
