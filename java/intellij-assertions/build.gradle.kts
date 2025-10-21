@@ -30,7 +30,7 @@ dependencies {
     implementation("org.jetbrains:annotations:26.0.2")
 
     // Sample lib
-    implementation(files("../java/examplelib/build/libs/examplelib-1.0.0.jar"))
+    // implementation(files("../java/examplelib/build/libs/examplelib-1.0.0.jar"))
 }
 
 tasks.test {
