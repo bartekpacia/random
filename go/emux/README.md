@@ -1,6 +1,6 @@
 This small Go app is for testing [Cobra's shell completion capabilities][docs].
 
-See also:
+See also (might be useful):
 - https://github.com/ohmyzsh/ohmyzsh/wiki/Design
 - https://github.com/ohmyzsh/ohmyzsh/wiki/Settings
 
