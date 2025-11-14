@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+
+for i in 0 1 2 3; do
+    echo "===> przyklad ${i}"
+    GREEN='\033[0;32m'
+    RED='\033[0;31m'
+    NC='\033[0m'
+    if diff <(cat "examples/przyklad${i}.in" | ./main) "examples/przyklad${i}.out" >/dev/null
+    then
+        echo -e "${GREEN}Test ${i} passed${NC}"
+    else
+        echo -e "${RED}Test ${i} failed${NC}"
+    fi
+done

@@ -1,0 +1,3 @@
+Disabled compiler settings:
+-Wduplicated-cond (not supported by clang)
+-Wjump-misses-init (not supported by clang)
