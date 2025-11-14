@@ -1,6 +1,5 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #define MAX_DEGREE 10
 
@@ -11,10 +10,12 @@ int wczytaj_liczbe() {
     bool koniec_wczytywania = false;
 
     int c = getchar();
+    printf("WCZYTANO KURWĘ CHARA %c\n", c);
     while (!koniec_wczytywania) {
         if (c == ' ') {
             c = getchar();
         } else if (c == '-') {
+            printf("WCZYTANO KURWA ZNAK MINUSA!\n");
             znak = -1;
             c = getchar();
         } else if (c == '+') {
@@ -25,11 +26,18 @@ int wczytaj_liczbe() {
                 c = getchar();
             }
         }
-        printf("c not a digit, but %c\n", c);
+        printf("c not a digit, but %d\n", c);
         ungetc(c, stdin);
         koniec_wczytywania = true;
     }
-    return znak * liczba;
+
+    // if (liczba == 0) {
+    //     liczba = 1;
+    // }
+
+    int rezultat = znak * liczba;
+    printf("UWAGA ZWRACAM LICZBE %d\n", rezultat);
+    return rezultat;
 }
 
 int wczytaj_wykladnik() {
@@ -57,21 +65,34 @@ int wczytaj_wykladnik() {
 
 void dodaj_jednomian(int wielomian[]) {
     printf("dodaj_jednomian\n");
-    int wsp = wczytaj_liczbe();
-    int wykl = wczytaj_wykladnik();
-    wielomian[wykl] += wsp;
+    int wspolczynnik = wczytaj_liczbe();
+    int wykladnik = wczytaj_wykladnik();
+    wielomian[wykladnik] += wspolczynnik;
 }
 
 void dodawanie(int wielomian[]) {
-    int c = getchar();
-    printf("dodawanie, pierwszy znak = %c\n", c);
-    while (c != '\n') {
-        if (c != ' ') {
-            ungetc(c, stdin);
+    printf("dodawanie");
+    bool koniec = false;
+    while (!koniec) {
+        const int c = getchar();
+        if (c == ' ') {
+            // ignorujemy spację
+        } else if (c == '\n') {
+            koniec = true;
+            ungetc(c, stdin); // kod wyżej oczekuje nowej linii
+        } else {
+            ungetc(c, stdin); // kod niżej chce ten znak!
             dodaj_jednomian(wielomian);
         }
-        c = getchar();
     }
+
+    // while (c != '\n') {
+    //     if (c != ' ') {
+    //         ungetc(c, stdin);
+    //         dodaj_jednomian(wielomian);
+    //     }
+    //     c = getchar();
+    // }
 }
 
 void mnozenie(int wielomian[]) {
@@ -100,7 +121,7 @@ void mnozenie(int wielomian[]) {
         wielomian[i] = temp[i];
 
     // pomiń resztę linii
-    while ((c = getchar()) != '\n')
+    while (getchar() != '\n')
         ;
 }
 
@@ -122,20 +143,20 @@ void drukuj_wielomian(int wielomian[]) {
     printf("\n");
 }
 
-void debug_drukuj_wielomian(int wielomian[]) {
-    printf("-- debug start --\n");
-    printf("  wielomian: [");
-    for (int i = 0; i <= MAX_DEGREE; i++) {
-        printf("   %d", wielomian[i]);
-    }
-    printf("]\n");
-    printf("  indeksy:   [");
-    for (int i = 0; i <= MAX_DEGREE; i++) {
-        printf("   %d", i);
-    }
-    printf("]\n");
-    printf("-- debug end --\n");
-}
+// void debug_drukuj_wielomian(int wielomian[]) {
+//     printf("-- debug start --\n");
+//     printf("  wielomian: [");
+//     for (int i = 0; i <= MAX_DEGREE; i++) {
+//         printf("   %d", wielomian[i]);
+//     }
+//     printf("]\n");
+//     printf("  indeksy:   [");
+//     for (int i = 0; i <= MAX_DEGREE; i++) {
+//         printf("   %d", i);
+//     }
+//     printf("]\n");
+//     printf("-- debug end --\n");
+// }
 
 int main() {
     setbuf(stdout, NULL);
@@ -143,12 +164,9 @@ int main() {
     bool koniec_wszystkiego = false; // żeby nie było bandyctwa, żeby nie było złodziejstwa, żeby nie było niczego.
     bool koniec_linii = false;
 
-    debug_drukuj_wielomian(wielomian);
-
-    int c;
     while (!koniec_wszystkiego) {
         while (!koniec_linii) {
-            c = getchar();
+            const int c = getchar();
             if (c == ' ') {
                 // ignorujemy spacje
             } else if (c == '\n') {
@@ -161,7 +179,7 @@ int main() {
                 koniec_wszystkiego = true;
             }
             printf("koniec linii\n");
-            debug_drukuj_wielomian(wielomian);
+            drukuj_wielomian(wielomian);
         }
     }
 
