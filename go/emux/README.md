@@ -7,8 +7,8 @@ See also (might be useful):
 Build:
 
 ```console
-$ go build -o emu-cli ./cmd/emu-cli # build CLI built with urfave/cli
-$ go build -o emu-cobra ./cmd/emu-cobra # build CLI built with spf13/cobra
+$ go build -o emu-cli ./cmd/emu-cli # build CLI using urfave/cli
+$ go build -o emu-cobra ./cmd/emu-cobra # build CLI using spf13/cobra
 ```
 
 Source completions for the current shell:
@@ -157,10 +157,8 @@ iPhone 15
 Completion ended with directive: ShellCompDirectiveNoFileComp
 ```
 
-> ![NOTE]
-> The `:4`
->
-is [the directive](https://github.com/spf13/cobra/blob/756ba6dad61458cbbf7abecfc502d230574c57d2/completions.go#L43-L44).
+> [!NOTE]
+> The `:4` is [the directive](https://github.com/spf13/cobra/blob/756ba6dad61458cbbf7abecfc502d230574c57d2/completions.go#L43-L44).
 
 ```go
 cobra.CompDebugln("this string will appear in __complete output", true)
