@@ -5,8 +5,15 @@ This memo is Zsh-focused because I'm a user of Zsh.
 Some resources (might be useful):
 - https://github.com/ohmyzsh/ohmyzsh/wiki/Design
 - https://github.com/ohmyzsh/ohmyzsh/wiki/Settings
-- [A User's Guide to the Zsh](https://zsh.sourceforge.io/Guide/)
+- [ZSH Documentation](https://zsh.sourceforge.io/Doc)
+  - [18 Zsh Line Editor](https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Zsh-Line-Editor)
+    - [18.4 Zle Widgets](https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Zle-Widgets)
+  - [19 Completion Widgets](https://zsh.sourceforge.io/Doc/Release/Completion-Widgets.html#Completion-Widgets)
+  - [20 Completion System](https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Completion-System)
+- [A User's Guide to the Z-Shell](https://zsh.sourceforge.io/Guide)
   - in particular: [Chapter 6: Completion, old and new](https://zsh.sourceforge.io/Guide/zshguide06.html#l144)
+- [Z-Shell Frequently-Asked Questions](https://zsh.sourceforge.io/FAQ)
+  - in particular: [Chapter 4: The mysteries of completion](https://zsh.sourceforge.io/FAQ/zshfaq04.html#l49)
 
 Zsh has two completion systems: compsys is new, compctl is old.
 
