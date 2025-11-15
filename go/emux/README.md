@@ -12,6 +12,7 @@ Some resources (might be useful):
   - [20 Completion System](https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Completion-System)
 - [A User's Guide to the Z-Shell](https://zsh.sourceforge.io/Guide)
   - in particular: [Chapter 6: Completion, old and new](https://zsh.sourceforge.io/Guide/zshguide06.html#l144)
+    - in particular: `6.3: Getting started with new completion`
 - [Z-Shell Frequently-Asked Questions](https://zsh.sourceforge.io/FAQ)
   - in particular: [Chapter 4: The mysteries of completion](https://zsh.sourceforge.io/FAQ/zshfaq04.html#l49)
 
