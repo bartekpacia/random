@@ -219,6 +219,7 @@ void wielomian_pomnoz(int akumulator[], int nowy[]) {
 #define OP_MNOZENIE 2
 #define OP_KONIEC 3
 
+#ifndef TESTING
 int main() {
     setbuf(stdout, NULL);
     int akumulator[MAX_DEGREE + 1] = {0};
@@ -257,3 +258,4 @@ int main() {
 
     return 0;
 }
+#endif
