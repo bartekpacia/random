@@ -1,0 +1,11 @@
+zsh/compctl
+zsh/complete
+zsh/complist
+zsh/computil
+zsh/datetime
+zsh/main
+zsh/parameter
+zsh/regex
+zsh/terminfo
+zsh/zle
+zsh/zutil
