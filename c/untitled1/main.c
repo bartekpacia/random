@@ -139,7 +139,7 @@ void mnozenie(int wielomian[]) {
         ;
 }
 
-void drukuj_wielomian(int wielomian[]) {
+void wielomian_drukuj(int wielomian[]) {
     for (int i = MAX_DEGREE; i >= 0; i--) {
         if (wielomian[i] != 0) {
             if (i == 0) {
@@ -149,9 +149,9 @@ void drukuj_wielomian(int wielomian[]) {
             } else {
                 printf("%dx^%d", wielomian[i], i);
             }
-
-            if (i > 0)
+            if (i > 0) {
                 printf(" + ");
+            }
         }
     }
     printf("\n");
@@ -193,6 +193,28 @@ void skip_spaces() {
     ungetc(c, stdin); // ostatnio wczytany znak nie był spacją, a więc zwróćmy go
 }
 
+void wielomian_dodaj(int akumulator[], int nowy[]) {
+    for (int i = 0; i <= MAX_DEGREE; i++) {
+        akumulator[i] += nowy[i];
+    }
+    printf("wielomian_dodaj: akumulator: ");
+    wielomian_drukuj(akumulator);
+}
+
+void wielomian_pomnoz(int akumulator[], int nowy[]) {
+    for (int i = 0; i <= MAX_DEGREE; i++) {
+        if (nowy[i] != 0) {
+            int tymczasowy[MAX_DEGREE + 1] = {0};
+            for (int j = 0; j <= MAX_DEGREE; j++) {
+                int stopien = i + j;
+                int wspolczynnik = nowy[i] * akumulator[j];
+                tymczasowy[stopien] = wspolczynnik;
+            }
+            wielomian_dodaj(akumulator, tymczasowy);
+        }
+    }
+}
+
 #define OP_DODAWANIE 1
 #define OP_MNOZENIE 2
 #define OP_KONIEC 3
@@ -220,7 +242,7 @@ int main() {
         }
 
         if (op == OP_DODAWANIE) {
-            // dodawanie(akumulator);
+            wielomian_dodaj(akumulator, wielomian);
         } else if (op == OP_MNOZENIE) {
             // mnozenie(akumulator);
         } else {
@@ -228,7 +250,7 @@ int main() {
         }
     }
 
-    drukuj_wielomian(akumulator);
+    wielomian_drukuj(akumulator);
     for (int k = 0; k < 11; k++) {
         printf("%d", akumulator[k]);
     }
