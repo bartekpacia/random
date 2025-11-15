@@ -4,40 +4,54 @@
 #define MAX_DEGREE 10
 
 int wczytaj_liczbe() {
-    printf("wczytaj_liczbe\n");
+    printf("wczytaj_liczbe: start\n");
     int liczba = 0;
     int znak = 1;
     bool koniec_wczytywania = false;
 
     int c = getchar();
-    printf("WCZYTANO KURWĘ CHARA %c\n", c);
+    printf("wczytaj_liczbe: wczytano pierwszy znak %c\n", c);
     while (!koniec_wczytywania) {
         if (c == ' ') {
             c = getchar();
         } else if (c == '-') {
-            printf("WCZYTANO KURWA ZNAK MINUSA!\n");
+            printf("wczytaj_liczbe: wczytano znak minus\n");
             znak = -1;
             c = getchar();
         } else if (c == '+') {
+            printf("wczytaj_liczbe: wczytano znak plus\n");
             c = getchar();
         } else if (c >= '0' && c <= '9') {
             while (c >= '0' && c <= '9') {
                 liczba = liczba * 10 + (c - '0');
                 c = getchar();
             }
+            printf("wczytaj_liczbe: wczytano liczbe %d, koniec wczytywania\n", liczba);
+            koniec_wczytywania = true;
+        } else if (c == 'x') {
+            printf("wczytaj_liczbe: wczytano znak x\n");
+            if (liczba == 0) {
+                printf("wczytaj_liczbe: wczytano znak x, a nie było przed nim liczby, wiec ustawiono liczbe na 1\n");
+                liczba = 1;
+            }
+            koniec_wczytywania = true;
+            ungetc(c, stdin);
         }
-        printf("c not a digit, but %d\n", c);
-        ungetc(c, stdin);
-        koniec_wczytywania = true;
+        // printf("c is not a digit, but: d = %d, c = %c\n", c, c);
+        // ungetc(c, stdin);
+        // koniec_wczytywania = true;
     }
 
+    // TODO: o
     // if (liczba == 0) {
     //     liczba = 1;
     // }
 
-    int rezultat = znak * liczba;
-    printf("UWAGA ZWRACAM LICZBE %d\n", rezultat);
-    return rezultat;
+    printf("wczytaj_liczbe: RETURN! znak = %d, liczba = %d\n", znak, liczba);
+    char nextChar = getchar();
+    printf("wczytaj_liczbe: nastepny char to będzie %c\n", nextChar);
+    ungetc(nextChar, stdin);
+    return znak * liczba;
 }
 
 int wczytaj_wykladnik() {
