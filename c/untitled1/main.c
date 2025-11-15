@@ -172,34 +172,65 @@ void drukuj_wielomian(int wielomian[]) {
 //     printf("-- debug end --\n");
 // }
 
-int main() {
-    setbuf(stdout, NULL);
-    int wielomian[MAX_DEGREE + 1] = {0};
-    bool koniec_wszystkiego = false; // żeby nie było bandyctwa, żeby nie było złodziejstwa, żeby nie było niczego.
-    bool koniec_linii = false;
-
-    while (!koniec_wszystkiego) {
-        while (!koniec_linii) {
-            const int c = getchar();
-            if (c == ' ') {
-                // ignorujemy spacje
-            } else if (c == '\n') {
-                koniec_linii = true;
-            } else if (c == '+') {
-                dodawanie(wielomian);
-            } else if (c == '*') {
-                mnozenie(wielomian);
-            } else if (c == '.') {
-                koniec_wszystkiego = true;
-            }
-            printf("koniec linii\n");
-            drukuj_wielomian(wielomian);
+void parse_wielomian(int *wielomian) {
+    int c;
+    while ((c = getchar()) != '\n') {
+        if (c != ' ') {
+            printf("%c", c);
         }
     }
 
-    drukuj_wielomian(wielomian);
+    wielomian[0] = 2137;
+
+    printf("\n");
+}
+
+void skip_spaces() {
+    int c = getchar();
+    while (c == ' ') {
+        c = getchar(); // pomijamy spacje pomiędzy pierwszym znakiem (znakiem operacji) a początkiem wielomianu
+    }
+    ungetc(c, stdin); // ostatnio wczytany znak nie był spacją, a więc zwróćmy go
+}
+
+#define OP_DODAWANIE 1
+#define OP_MNOZENIE 2
+#define OP_KONIEC 3
+
+int main() {
+    setbuf(stdout, NULL);
+    int akumulator[MAX_DEGREE + 1] = {0};
+    bool koniec_wszystkiego = false;
+
+    while (!koniec_wszystkiego) {
+        int op = -1; // 1 = dodawanie, 2 = mnożenie, 3 = koniec
+        int c = getchar();
+
+        int wielomian[MAX_DEGREE + 1] = {0};
+        if (c == '+') {
+            op = OP_DODAWANIE;
+            skip_spaces();
+            parse_wielomian(wielomian);
+        } else if (c == '*') {
+            op = OP_MNOZENIE;
+            skip_spaces();
+            parse_wielomian(wielomian);
+        } else if (c == '.') {
+            op = OP_KONIEC;
+        }
+
+        if (op == OP_DODAWANIE) {
+            // dodawanie(akumulator);
+        } else if (op == OP_MNOZENIE) {
+            // mnozenie(akumulator);
+        } else {
+            koniec_wszystkiego = true;
+        }
+    }
+
+    drukuj_wielomian(akumulator);
     for (int k = 0; k < 11; k++) {
-        printf("%d", wielomian[k]);
+        printf("%d", akumulator[k]);
     }
 
     return 0;
