@@ -28,15 +28,16 @@ See manpages:
 Let's introduce a simple helper program for managing iOS simulators and Android emulators called `emux`
 (it's based on a real [emu](https://github.com/bartekpacia/emu), but it doesn't matter here).
 
-`emux` is interesting from the shell completion perspective.
-
 `emux` has two variants -
 one using [spf13/cobra](https://github.com/spf13/cobra) (`emux-cobra`), and one using [urfave/cli](https://github.com/urfave/cli) (`emux-cli`).
 
 The aim is to look at how shell completion works in the spf13/cobra variant,
 so we can improve the urfave/cli variant.
-
 This small Go app is for testing [Cobra's shell completion capabilities][docs].
+
+`emux` is interesting from the shell completion perspective.
+For example, completion for argument `--os-
+
 
 Build:
 
