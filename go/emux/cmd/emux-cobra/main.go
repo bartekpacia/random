@@ -176,7 +176,7 @@ func main() {
 }
 
 var rootCmd = &cobra.Command{
-	Use:               "emu-cobra",
+	Use:               "emux-cobra",
 	Short:             "A brief description of your application",
 	ValidArgsFunction: cobra.NoFileCompletions,
 }

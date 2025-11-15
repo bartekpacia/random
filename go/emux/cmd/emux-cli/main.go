@@ -13,7 +13,7 @@ var devices = []string{"Pixel 7 API 34", "iPhone 12 mini", "iPhone 15"}
 
 func main() {
 	root := &cli.Command{
-		Name:                  "emu-cli",
+		Name:                  "emux-cli",
 		Usage:                 "Manage android emulators with ease",
 		EnableShellCompletion: true,
 		HideHelpCommand:       true,

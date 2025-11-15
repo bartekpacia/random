@@ -1,27 +1,53 @@
-This small Go app is for testing [Cobra's shell completion capabilities][docs].
+# The great trove of shell completion knowledge
 
-See also (might be useful):
+This memo is Zsh-focused because I'm a user of Zsh.
+
+Some resources (might be useful):
 - https://github.com/ohmyzsh/ohmyzsh/wiki/Design
 - https://github.com/ohmyzsh/ohmyzsh/wiki/Settings
+- [A User's Guide to the Zsh](https://zsh.sourceforge.io/Guide/)
+  - in particular: [Chapter 6: Completion, old and new](https://zsh.sourceforge.io/Guide/zshguide06.html#l144)
+
+Zsh has two completion systems: compsys is new, compctl is old.
+
+See manpages:
+- `zshcompwid(1)` - zsh completion widgets
+- `zshcompsys(1)` - zsh completion system
+- ~`zshcompctl(1)` - zsh programmable completion~ (old!)
+
+# The sample app
+
+Let's introduce a simple helper program for managing iOS simulators and Android emulators called `emux`
+(it's based on a real [emu](https://github.com/bartekpacia/emu), but it doesn't matter here).
+
+`emux` is interesting from the shell completion perspective.
+
+`emux` has two variants -
+one using [spf13/cobra](https://github.com/spf13/cobra) (`emux-cobra`), and one using [urfave/cli](https://github.com/urfave/cli) (`emux-cli`).
+
+The aim is to look at how shell completion works in the spf13/cobra variant,
+so we can improve the urfave/cli variant.
+
+This small Go app is for testing [Cobra's shell completion capabilities][docs].
 
 Build:
 
 ```console
-$ go build -o emu-cli ./cmd/emu-cli # build CLI using urfave/cli
-$ go build -o emu-cobra ./cmd/emu-cobra # build CLI using spf13/cobra
+$ go build -o emux-cli ./cmd/emux-cli # build CLI using urfave/cli
+$ go build -o emux-cobra ./cmd/emux-cobra # build CLI using spf13/cobra
 ```
 
 Source completions for the current shell:
 
 ```console
-$ . <(./emu-cli completion zsh)
-$ . <(./emu-cobra completion zsh)
+$ . <(./emux-cli completion zsh)
+$ . <(./emux-cobra completion zsh)
 ```
 
 Test command completion:
 
 ```console
-$ ./emu-cli r[tab]
+$ ./emux-cli r[tab]
 completion  -- Generate the autocompletion script for the specified shell
 help        -- Help about any command
 run         -- Run app on device
@@ -30,7 +56,7 @@ run         -- Run app on device
 Test flag completion:
 
 ```console
-$ ./emu-cli --device [tab]
+$ ./emux-cli --device [tab]
 Barteks-iPhone  emulator-5554
 ```
 
@@ -46,7 +72,7 @@ emulators and iOS simulators.
 t=1
 
 ```console
-$ ./emu-cli [tab]
+$ ./emux-cli [tab]
 create  -- Create a new device
 kill    -- Kill a single device
 run     -- Start a single device
@@ -56,7 +82,7 @@ runall  -- Start many devices
 t=1
 
 ```console
-$ ./emu-cli r[tab]
+$ ./emux-cli r[tab]
 run     -- Start a single device
 runall  -- Start many devices
 ```
@@ -68,7 +94,7 @@ Use case: when an option has been selected, don't suggest any more completions.
 t=1
 
 ```console
-$ ./emu-cli run [tab]
+$ ./emux-cli run [tab]
 Pixel 7 API 34
 iPhone 12 mini
 iPhone 15
@@ -77,7 +103,7 @@ iPhone 15
 t=2
 
 ```console
-$ ./emu-cli run Pixel\ 7\ API\ 34 [tab] # nothing appears, selection has been made
+$ ./emux-cli run Pixel\ 7\ API\ 34 [tab] # nothing appears, selection has been made
 ```
 
 The default Zsh behavior is dependent upon some `zstyle` options. By default, it suggests files in $pwd.
@@ -90,7 +116,7 @@ starts with `-` or `--`.
 t=1
 
 ```console
-$ ./emu-cli run --[tab]
+$ ./emux-cli run --[tab]
 --fast
 --slow
 ```
@@ -98,7 +124,7 @@ $ ./emu-cli run --[tab]
 t=2
 
 ```console
-$ ./emu-cli run --fast [tab]
+$ ./emux-cli run --fast [tab]
 Pixel 7 API 34
 iPhone 12 mini
 iPhone 15
@@ -112,7 +138,7 @@ completed/entered/selected.
 t=1
 
 ```console
-$ ./emu-cli run [tab]
+$ ./emux-cli run [tab]
 Pixel 7 API 34
 iPhone 12 mini
 iPhone 15
@@ -121,7 +147,7 @@ iPhone 15
 t=1
 
 ```console
-$ ./emu-cli run Pixel 7 API 34 [tab]
+$ ./emux-cli run Pixel 7 API 34 [tab]
 iPhone 12 mini
 iPhone 15
 ```
@@ -129,7 +155,7 @@ iPhone 15
 t=2
 
 ```console
-./emu-cli run Pixel 7 API 34 iPhone 12 mini
+./emux-cli run Pixel 7 API 34 iPhone 12 mini
 ```
 
 ### Complete a single value for a flag element (with flags)
@@ -149,7 +175,7 @@ $ TODO: invent some example (e.g. --device [value])
 [Cobra docs](https://github.com/spf13/cobra/blob/v1.8.0/site/content/completions/_index.md#debugging)
 
 ```console
-./emu-cli __complete run ""
+./emux-cli __complete run ""
 Pixel 7 API 34
 iPhone 12 mini
 iPhone 15
@@ -189,7 +215,7 @@ API changes:
 - Add `cli.ShellCompleteFunc` func type, same as in cobra
 
 
-** Decision to be made**
+**Decision to be made**
 
 Does `urfave/cli` migrate to hidden `__complete` command,
 or does it keep `--generate-shell-completion` arg?
