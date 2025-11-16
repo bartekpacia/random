@@ -91,6 +91,9 @@ int parse_duzo() {
 }
 
 void parse_jednomian(int *wspolczynnik, int *wykladnik) {
+    *wspolczynnik = 0;
+    *wykladnik = 0;
+
     LOG_FN("start\n");
     // Możliwe 3 formy jednomianu:
     //  1: 1 (po prostu jedynka)
@@ -117,15 +120,17 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
     } else {
         ungetc(c, stdin);
         const int duzo = parse_duzo();
-        if (duzo == -1) {
-            printf("parse_jednomian ERROR: duzo nie moze byc tutaj -1\n");
-            exit(1);
+        if (duzo != -1) {
+            *wspolczynnik = duzo;
         }
-        *wspolczynnik = duzo;
         *wykladnik = 0;
 
         c = getchar();
         if (c == 'x') {
+            if (*wspolczynnik == 0) {
+                *wspolczynnik = 1;
+            }
+
             *wykladnik = 1;
             c = getchar();
             if (c == '^') {
@@ -269,7 +274,7 @@ int main() {
             LOG("nowa linia\n");
             op = OP_NEWLINE;
         } else {
-            printf("niepoprawny znak początku linii: %c\n", c);
+            printf("niepoprawny znak początku linii: ASCII: %c, DEC: %d\n", c, c);
             exit(1);
         }
 
