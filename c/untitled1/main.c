@@ -202,7 +202,7 @@ void wielomian_dodaj(int akumulator[], int nowy[]) {
 void wielomian_pomnoz(int akumulator[], int nowy[]) {
     int akumulator_new[MAX_DEGREE + 1] = {0};
     for (int i = 0; i < MAX_DEGREE + 1; i++) {
-        akumulator_new[i] = akumulator[i];
+        // akumulator_new[i] = akumulator[i];
     }
 
     for (int i = MAX_DEGREE; i >= 0; i--) {
@@ -211,8 +211,8 @@ void wielomian_pomnoz(int akumulator[], int nowy[]) {
             for (int j = MAX_DEGREE; j >= 0; j--) {
                 if (nowy[j] != 0) {
                     const int stopien = i + j;
-                    const int wspolczynnik = akumulator[j] * nowy[j];
-                    printf("mnożymy: %dx^%d * %dx^%d\n", akumulator[i], i, nowy[j], j);
+                    const int wspolczynnik = akumulator[i] * nowy[j];
+                    printf("mnożymy: %dx^%d * %dx^%d = %dx^%d\n", akumulator[i], i, nowy[j], j, wspolczynnik, stopien);
                     tymczasowy[stopien] = wspolczynnik;
                 }
             }
@@ -228,10 +228,11 @@ void wielomian_pomnoz(int akumulator[], int nowy[]) {
         }
     }
 
-    // wielomian_dodaj(akumulator, akumulator_new);
+    wielomian_dodaj(akumulator, akumulator_new);
     for (int i = 0; i < MAX_DEGREE + 1; i++) {
         akumulator[i] = akumulator_new[i];
     }
+    // wielomian_dodaj(akumulator, akumulator_new);
 }
 
 #define OP_DODAWANIE 1
