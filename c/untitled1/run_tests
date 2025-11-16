@@ -4,7 +4,6 @@
 for file_in in examples/*.in; do
     base_name="${file_in%.in}"
     file_out="${base_name}.out"
-    # echo "===> ${base_name}"
     GREEN='\033[0;32m'
     RED='\033[0;31m'
     NC='\033[0m'

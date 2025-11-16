@@ -4,6 +4,12 @@
 
 #define MAX_DEGREE 10
 
+#ifdef DEBUG
+#define LOG(...) printf(__VA_ARGS__)
+#else
+#define LOG(...) ((void)0)
+#endif
+
 void wielomian_drukuj(int wielomian[]) {
     for (int i = MAX_DEGREE; i >= 0; i--) {
         if (wielomian[i] != 0) {
@@ -14,7 +20,7 @@ void wielomian_drukuj(int wielomian[]) {
             } else {
                 printf("%dx^%d", wielomian[i], i);
             }
-            if (i > 0) {
+            if (i > 0 && wielomian[i - 1] != 0) {
                 printf(" + ");
             }
         }
@@ -48,6 +54,7 @@ int parse_cyfra() {
 }
 
 int parse_duzo() {
+    LOG("    3. parse_duzo\n");
     int liczba = -2137;
     const int c = getchar();
     if (c == '1') {
@@ -74,7 +81,7 @@ int parse_duzo() {
 }
 
 void parse_jednomian(int *wspolczynnik, int *wykladnik) {
-    printf("  2. begin parsing jednomian...\n");
+    LOG("  2. parse_jednomian\n");
     // Możliwe 3 formy jednomianu:
     //  1: 1 (po prostu jedynka)
     //  2: 2137 <dużo> (same cyfry)
@@ -87,21 +94,21 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
         *wspolczynnik = 1;
         *wykladnik = 0;
 
-        // int cyfra = parse_cyfra();
-        // if (cyfra == -1) {
-        //     printf("ERROR: cyfra jest %d\n", cyfra);
-        //     exit(1);
-        // }
-        //
-        // while ((cyfra = parse_cyfra()) != -1) {
-        //     *wspolczynnik *= 10;
-        //     *wspolczynnik += cyfra;
-        // }
+        int duzo = parse_duzo();
+        if (duzo != -1) {
+            *wspolczynnik *= 10;
+            *wspolczynnik += duzo;
+        }
+
+        while ((duzo = parse_duzo()) != -1) {
+            *wspolczynnik *= 10;
+            *wspolczynnik += duzo;
+        }
     } else {
         ungetc(c, stdin);
         const int duzo = parse_duzo();
         if (duzo == -1) {
-            printf("ERROR: duzo nie moze byc tutaj -1\n");
+            LOG("ERROR: duzo nie moze byc tutaj -1\n");
             exit(1);
         }
         *wspolczynnik = duzo;
@@ -141,7 +148,7 @@ int parse_operacja() {
 }
 
 void parse_wielomian(int *wielomian) {
-    printf("1. begin parsing wielomian...\n");
+    LOG("1. parse_wielomian...\n");
     const int c = getchar();
     if (c == '0') {
         wielomian[0] = 0; // this line is probably redundant too
@@ -157,18 +164,16 @@ void parse_wielomian(int *wielomian) {
         int wykladnik = 0;
         parse_jednomian(&wspolczynnik, &wykladnik);
         wielomian[wykladnik] = znak_pierwszego_jednomianu * wspolczynnik;
+        LOG("1. sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
 
         int op;
         while ((op = parse_operacja()) != -1) {
             parse_jednomian(&wspolczynnik, &wykladnik);
             if (op == '-') {
-                wielomian[wykladnik] = -wspolczynnik;
-            } else if (op == '+') {
-                wielomian[wykladnik] += wspolczynnik;
-            } else {
-                printf("niepoprawna operacja: %d\n", op);
-                exit(1);
+                wspolczynnik = -wspolczynnik;
             }
+            wielomian[wykladnik] = wspolczynnik;
+            LOG("1. sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
         }
     }
 }
@@ -193,23 +198,23 @@ void wielomian_pomnoz(int output[], int akumulator[], int nowy[]) {
     for (int i = MAX_DEGREE; i >= 0; i--) {
         if (akumulator[i] != 0) {
             int tymczasowy[MAX_DEGREE + 1] = {0};
-            printf("---> START\n");
+            LOG("---> START\n");
             for (int j = MAX_DEGREE; j >= 0; j--) {
                 if (nowy[j] != 0) {
                     const int stopien = i + j;
                     const int wspolczynnik = akumulator[i] * nowy[j];
-                    printf("mnożymy: %dx^%d * %dx^%d = %dx^%d\n", akumulator[i], i, nowy[j], j, wspolczynnik, stopien);
+                    LOG("mnożymy: %dx^%d * %dx^%d = %dx^%d\n", akumulator[i], i, nowy[j], j, wspolczynnik, stopien);
                     tymczasowy[stopien] = wspolczynnik;
                 }
             }
-            printf("akumulator_new: \n");
-            wielomian_drukuj(delta);
-            printf("tymczasowy:\n");
-            wielomian_drukuj(tymczasowy);
+            LOG("akumulator_new: \n");
+            // wielomian_drukuj(delta);
+            LOG("tymczasowy:\n");
+            // wielomian_drukuj(tymczasowy);
             wielomian_dodaj(delta, tymczasowy);
-            printf("po dodaniu ich obu:\n");
-            wielomian_drukuj(delta);
-            printf("---> END\n");
+            LOG("po dodaniu ich obu:\n");
+            // wielomian_drukuj(delta);
+            LOG("---> END\n");
         }
     }
 
@@ -222,6 +227,7 @@ void wielomian_pomnoz(int output[], int akumulator[], int nowy[]) {
 #define OP_DODAWANIE 1
 #define OP_MNOZENIE 2
 #define OP_KONIEC 3
+#define OP_NEWLINE 4
 
 #ifndef TESTING
 int main() {
@@ -245,6 +251,8 @@ int main() {
             op = OP_KONIEC;
         } else if (c == '\n') {
             // kontynuuj do nowej linii
+            LOG("nowa linia\n");
+            op = OP_NEWLINE;
         } else {
             printf("niepoprawny znak początku linii: %c\n", c);
             exit(1);
@@ -259,12 +267,10 @@ int main() {
         } else if (op == OP_KONIEC) {
             koniec_wszystkiego = true;
         }
-    }
 
-    printf("koniec...\n");
-    wielomian_drukuj(akumulator);
-    for (int k = 0; k < 11; k++) {
-        printf("%d", akumulator[k]);
+        if (!koniec_wszystkiego && op != OP_NEWLINE) {
+            wielomian_drukuj(akumulator);
+        }
     }
 
     return 0;
