@@ -6,8 +6,10 @@
 
 #ifdef DEBUG
 #define LOG(...) printf(__VA_ARGS__)
+#define LOG_FN(...) printf("%s: ", __func__), printf(__VA_ARGS__)
 #else
 #define LOG(...) ((void)0)
+#define LOG_FN(...) ((void)0)
 #endif
 
 void wielomian_drukuj(int wielomian[]) {
@@ -61,7 +63,7 @@ int parse_cyfra() {
 }
 
 int parse_duzo() {
-    LOG("    3. parse_duzo\n");
+    LOG_FN("start\n");
     int liczba = -2137;
     const int c = getchar();
     if (c == '1') {
@@ -88,7 +90,7 @@ int parse_duzo() {
 }
 
 void parse_jednomian(int *wspolczynnik, int *wykladnik) {
-    LOG("  2. parse_jednomian\n");
+    LOG_FN("start\n");
     // Możliwe 3 formy jednomianu:
     //  1: 1 (po prostu jedynka)
     //  2: 2137 <dużo> (same cyfry)
@@ -115,7 +117,7 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
         ungetc(c, stdin);
         const int duzo = parse_duzo();
         if (duzo == -1) {
-            LOG("ERROR: duzo nie moze byc tutaj -1\n");
+            printf("parse_jednomian ERROR: duzo nie moze byc tutaj -1\n");
             exit(1);
         }
         *wspolczynnik = duzo;
@@ -133,7 +135,6 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
             } else {
                 ungetc(c, stdin);
             }
-
         } else {
             ungetc(c, stdin);
         }
@@ -151,11 +152,12 @@ int parse_operacja() {
         op = -1;
         ungetc(c, stdin);
     }
+    LOG_FN("%c\n", op);
     return op;
 }
 
 void parse_wielomian(int *wielomian) {
-    LOG("1. parse_wielomian...\n");
+    LOG_FN("start\n");
     const int c = getchar();
     if (c == '0') {
         wielomian[0] = 0; // this line is probably redundant too
@@ -171,7 +173,7 @@ void parse_wielomian(int *wielomian) {
         int wykladnik = 0;
         parse_jednomian(&wspolczynnik, &wykladnik);
         wielomian[wykladnik] = znak_pierwszego_jednomianu * wspolczynnik;
-        LOG("1. sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
+        LOG_FN("sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
 
         int op;
         while ((op = parse_operacja()) != -1) {
@@ -180,7 +182,7 @@ void parse_wielomian(int *wielomian) {
                 wspolczynnik = -wspolczynnik;
             }
             wielomian[wykladnik] = wspolczynnik;
-            LOG("1. sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
+            LOG_FN("sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
         }
     }
 }
