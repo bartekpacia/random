@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+DIFF="diff"
+if command -v delta >/dev/null 2>&1; then
+  DIFF="delta"
+fi
 
 for file_in in examples/*.in; do
     base_name="${file_in%.in}"
@@ -7,7 +11,7 @@ for file_in in examples/*.in; do
     GREEN='\033[0;32m'
     RED='\033[0;31m'
     NC='\033[0m'
-    if diff <(./main < "$file_in") "$file_out" >/dev/null
+    if $DIFF <(./main < "$file_in") "$file_out"
     then
         echo -e "${GREEN}Test $base_name passed${NC}"
     else
