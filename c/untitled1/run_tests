@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
 
-for i in 0 1 2 3; do
-    echo "===> przyklad ${i}"
+for file_in in examples/*.in; do
+    base_name="${file_in%.in}"
+    file_out="${base_name}.out"
+    # echo "===> ${base_name}"
     GREEN='\033[0;32m'
     RED='\033[0;31m'
     NC='\033[0m'
-    if diff <(cat "examples/przyklad${i}.in" | ./main) "examples/przyklad${i}.out" >/dev/null
+    if diff <(./main < "$file_in") "$file_out" >/dev/null
     then
-        echo -e "${GREEN}Test ${i} passed${NC}"
+        echo -e "${GREEN}Test $base_name passed${NC}"
     else
-        echo -e "${RED}Test ${i} failed${NC}"
+        echo -e "${RED}Test $base_name failed${NC}"
     fi
 done

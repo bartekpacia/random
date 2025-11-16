@@ -1,143 +1,8 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MAX_DEGREE 10
-
-int wczytaj_liczbe() {
-    printf("wczytaj_liczbe: start\n");
-    int liczba = 0;
-    int znak = 1;
-    bool koniec_wczytywania = false;
-
-    int c = getchar();
-    printf("wczytaj_liczbe: wczytano pierwszy znak %c\n", c);
-    while (!koniec_wczytywania) {
-        if (c == ' ') {
-            c = getchar();
-        } else if (c == '-') {
-            printf("wczytaj_liczbe: wczytano znak minus\n");
-            znak = -1;
-            c = getchar();
-        } else if (c == '+') {
-            printf("wczytaj_liczbe: wczytano znak plus\n");
-            c = getchar();
-        } else if (c >= '0' && c <= '9') {
-            while (c >= '0' && c <= '9') {
-                liczba = liczba * 10 + (c - '0');
-                c = getchar();
-            }
-            printf("wczytaj_liczbe: wczytano liczbe %d, koniec wczytywania\n", liczba);
-            koniec_wczytywania = true;
-        } else if (c == 'x') {
-            printf("wczytaj_liczbe: wczytano znak x\n");
-            if (liczba == 0) {
-                printf("wczytaj_liczbe: wczytano znak x, a nie było przed nim liczby, wiec ustawiono liczbe na 1\n");
-                liczba = 1;
-            }
-            koniec_wczytywania = true;
-            ungetc(c, stdin);
-        }
-        // printf("c is not a digit, but: d = %d, c = %c\n", c, c);
-        // ungetc(c, stdin);
-        // koniec_wczytywania = true;
-    }
-
-    // TODO: o
-    // if (liczba == 0) {
-    //     liczba = 1;
-    // }
-
-    printf("wczytaj_liczbe: RETURN! znak = %d, liczba = %d\n", znak, liczba);
-    int nextChar = getchar();
-    printf("wczytaj_liczbe: nastepny char to będzie %c\n", nextChar);
-    ungetc(nextChar, stdin);
-    return znak * liczba;
-}
-
-int wczytaj_wykladnik() {
-    printf("wczytaj_wykladnik\n");
-    int wykl = 0;
-    int c = getchar();
-
-    if (c == 'x') {
-        c = getchar();
-        while (c == ' ') {
-            c = getchar(); // potem spacje po ^ pomija dzieki funkcji wczytaj liczbe
-        }
-        if (c == '^') {
-            wykl = wczytaj_liczbe();
-        } else {
-            wykl = 1;
-            ungetc(c, stdin); // zwracamy znak do bufora ?????
-        }
-    } else {
-        wykl = 0;
-        ungetc(c, stdin);
-    }
-    return wykl;
-}
-
-void dodaj_jednomian(int wielomian[]) {
-    printf("dodaj_jednomian\n");
-    int wspolczynnik = wczytaj_liczbe();
-    int wykladnik = wczytaj_wykladnik();
-    wielomian[wykladnik] += wspolczynnik;
-}
-
-void dodawanie(int wielomian[]) {
-    printf("dodawanie");
-    bool koniec = false;
-    while (!koniec) {
-        const int c = getchar();
-        if (c == ' ') {
-            // ignorujemy spację
-        } else if (c == '\n') {
-            koniec = true;
-            ungetc(c, stdin); // kod wyżej oczekuje nowej linii
-        } else {
-            ungetc(c, stdin); // kod niżej chce ten znak!
-            dodaj_jednomian(wielomian);
-        }
-    }
-
-    // while (c != '\n') {
-    //     if (c != ' ') {
-    //         ungetc(c, stdin);
-    //         dodaj_jednomian(wielomian);
-    //     }
-    //     c = getchar();
-    // }
-}
-
-void mnozenie(int wielomian[]) {
-    printf("mnozenie\n");
-    int temp[MAX_DEGREE + 1] = {0};
-    int c = getchar();
-
-    while (c == ' ') {
-        c = getchar(); // pomijamy spacje
-    }
-    ungetc(c, stdin);
-
-    int wspolczynnik = wczytaj_liczbe(); // for 21x^37, will return 21
-    printf("wczytano wspolczynnik: %d\n", wspolczynnik);
-    int wykladnik = wczytaj_wykladnik(); // for 21x^37, will return 37
-    printf("wczytano wykladnik: %d\n", wykladnik);
-
-    for (int i = 0; i <= MAX_DEGREE; i++) {
-        if (wielomian[i] != 0) {
-            int nowy_wykl = i + wykladnik;
-            if (nowy_wykl <= MAX_DEGREE)
-                temp[nowy_wykl] += wielomian[i] * wspolczynnik;
-        }
-    }
-    for (int i = 0; i <= MAX_DEGREE; i++)
-        wielomian[i] = temp[i];
-
-    // pomiń resztę linii
-    while (getchar() != '\n')
-        ;
-}
 
 void wielomian_drukuj(int wielomian[]) {
     for (int i = MAX_DEGREE; i >= 0; i--) {
@@ -157,32 +22,155 @@ void wielomian_drukuj(int wielomian[]) {
     printf("\n");
 }
 
-// void debug_drukuj_wielomian(int wielomian[]) {
-//     printf("-- debug start --\n");
-//     printf("  wielomian: [");
-//     for (int i = 0; i <= MAX_DEGREE; i++) {
-//         printf("   %d", wielomian[i]);
-//     }
-//     printf("]\n");
-//     printf("  indeksy:   [");
-//     for (int i = 0; i <= MAX_DEGREE; i++) {
-//         printf("   %d", i);
-//     }
-//     printf("]\n");
-//     printf("-- debug end --\n");
-// }
+int parse_cyfra_od_2_do_9(int c) {
+    int digit = c - '0';
+    if (digit < 2 || digit > 9) {
+        digit = -1;
+    }
+    return digit;
+}
 
-void parse_wielomian(int *wielomian) {
-    int c;
-    while ((c = getchar()) != '\n') {
-        if (c != ' ') {
-            printf("%c", c);
+int parse_cyfra() {
+    int cyfra;
+    const int c = getchar();
+    if (c == '0') {
+        cyfra = 0;
+    } else if (c == '1') {
+        cyfra = 1;
+    } else {
+        cyfra = parse_cyfra_od_2_do_9(c);
+        if (cyfra == -1) {
+            cyfra = -1;
+            ungetc(c, stdin);
         }
     }
+    return cyfra;
+}
 
-    wielomian[0] = 2137;
+int parse_duzo() {
+    int liczba = -2137;
+    const int c = getchar();
+    if (c == '1') {
+        liczba = 1;
+        int cyfra;
+        while ((cyfra = parse_cyfra()) != -1) {
+            liczba *= 10;
+            liczba += cyfra;
+        }
+    } else {
+        int cyfra = parse_cyfra_od_2_do_9(c);
+        if (cyfra == -1) {
+            liczba = -1;
+            ungetc(c, stdin);
+        } else {
+            liczba = cyfra;
+            while ((cyfra = parse_cyfra()) != -1) {
+                liczba *= 10;
+                liczba += cyfra;
+            }
+        }
+    }
+    return liczba;
+}
 
-    printf("\n");
+void parse_jednomian(int *wspolczynnik, int *wykladnik) {
+    printf("  2. begin parsing jednomian...\n");
+    // Możliwe 3 formy jednomianu:
+    //  1: 1 (po prostu jedynka)
+    //  2: 2137 <dużo> (same cyfry)
+    //  3a: 2137x <dużo> "x"
+    //  3b: x^2 ("x" "^" <dużo>
+    //  3c: 2137x^2 (<dużo> "x" "^" <dużo>
+
+    int c = getchar();
+    if (c == '1') {
+        *wspolczynnik = 1;
+        *wykladnik = 0;
+
+        // int cyfra = parse_cyfra();
+        // if (cyfra == -1) {
+        //     printf("ERROR: cyfra jest %d\n", cyfra);
+        //     exit(1);
+        // }
+        //
+        // while ((cyfra = parse_cyfra()) != -1) {
+        //     *wspolczynnik *= 10;
+        //     *wspolczynnik += cyfra;
+        // }
+    } else {
+        ungetc(c, stdin);
+        const int duzo = parse_duzo();
+        if (duzo == -1) {
+            printf("ERROR: duzo nie moze byc tutaj -1\n");
+            exit(1);
+        }
+        *wspolczynnik = duzo;
+        *wykladnik = 0;
+
+        c = getchar();
+        if (c == 'x') {
+            *wykladnik = 1;
+            c = getchar();
+            if (c == '^') {
+                const int wykl = parse_duzo();
+                if (wykl != -1) {
+                    *wykladnik = wykl;
+                }
+            } else {
+                ungetc(c, stdin);
+            }
+
+        } else {
+            ungetc(c, stdin);
+        }
+    }
+}
+
+int parse_operacja() {
+    int op;
+    const int c = getchar();
+    if (c == '+') {
+        op = '+';
+    } else if (c == '-') {
+        op = '-';
+    } else {
+        op = -1;
+        ungetc(c, stdin);
+    }
+    return op;
+}
+
+void parse_wielomian(int *wielomian) {
+    printf("1. begin parsing wielomian...\n");
+    const int c = getchar();
+    if (c == '0') {
+        wielomian[0] = 0; // this line is probably redundant too
+    } else {
+        int znak_pierwszego_jednomianu = 1;
+        if (c == '-') {
+            znak_pierwszego_jednomianu = -1;
+        } else {
+            ungetc(c, stdin);
+        }
+
+        int wspolczynnik = 0;
+        int wykladnik = 0;
+        parse_jednomian(&wspolczynnik, &wykladnik);
+        wielomian[wykladnik] = znak_pierwszego_jednomianu * wspolczynnik;
+
+        int op;
+        while ((op = parse_operacja()) != -1) {
+            parse_jednomian(&wspolczynnik, &wykladnik);
+            if (op == '-') {
+                wielomian[wykladnik] = -wspolczynnik;
+            } else if (op == '+') {
+                wielomian[wykladnik] += wspolczynnik;
+            } else {
+                printf("niepoprawna operacja: %d\n", op);
+                exit(1);
+            }
+        }
+    }
 }
 
 void skip_spaces() {
@@ -193,7 +181,7 @@ void skip_spaces() {
     ungetc(c, stdin); // ostatnio wczytany znak nie był spacją, a więc zwróćmy go
 }
 
-void wielomian_dodaj(int akumulator[], int nowy[]) {
+void wielomian_dodaj(int akumulator[], const int nowy[]) {
     for (int i = 0; i <= MAX_DEGREE; i++) {
         akumulator[i] += nowy[i];
     }
@@ -243,8 +231,7 @@ int main() {
 
     while (!koniec_wszystkiego) {
         int op = -1; // 1 = dodawanie, 2 = mnożenie, 3 = koniec
-        int c = getchar();
-
+        const int c = getchar();
         int wielomian[MAX_DEGREE + 1] = {0};
         if (c == '+') {
             op = OP_DODAWANIE;
@@ -256,17 +243,25 @@ int main() {
             parse_wielomian(wielomian);
         } else if (c == '.') {
             op = OP_KONIEC;
+        } else if (c == '\n') {
+            // kontynuuj do nowej linii
+        } else {
+            printf("niepoprawny znak początku linii: %c\n", c);
+            exit(1);
         }
 
         if (op == OP_DODAWANIE) {
             wielomian_dodaj(akumulator, wielomian);
         } else if (op == OP_MNOZENIE) {
-            // mnozenie(akumulator);
-        } else {
+            int rezultat_mnozenia[MAX_DEGREE + 1] = {0};
+            wielomian_pomnoz(rezultat_mnozenia, akumulator, wielomian);
+            wielomian_dodaj(akumulator, rezultat_mnozenia);
+        } else if (op == OP_KONIEC) {
             koniec_wszystkiego = true;
         }
     }
 
+    printf("koniec...\n");
     wielomian_drukuj(akumulator);
     for (int k = 0; k < 11; k++) {
         printf("%d", akumulator[k]);
