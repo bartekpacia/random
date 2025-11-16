@@ -12,6 +12,14 @@
 #define LOG_FN(...) ((void)0)
 #endif
 
+void skip_spaces() {
+    int c = getchar();
+    while (c == ' ') {
+        c = getchar(); // pomijamy spacje pomiędzy pierwszym znakiem (znakiem operacji) a początkiem wielomianu
+    }
+    ungetc(c, stdin); // ostatnio wczytany znak nie był spacją, a więc zwróćmy go
+}
+
 void wielomian_drukuj(int wielomian[]) {
     int lowest_index_with_nonzero_wspolczynnik = MAX_DEGREE;
     for (int i = MAX_DEGREE; i >= 0; i--) {
@@ -20,8 +28,10 @@ void wielomian_drukuj(int wielomian[]) {
         }
     }
 
+    bool wszystko_zerowe = true;
     for (int i = MAX_DEGREE; i >= 0; i--) {
         if (wielomian[i] != 0) {
+            wszystko_zerowe = false;
             if (i == 0) {
                 printf("%d", wielomian[i]);
             } else if (i == 1) {
@@ -34,6 +44,11 @@ void wielomian_drukuj(int wielomian[]) {
             }
         }
     }
+
+    if (wszystko_zerowe) {
+        printf("0");
+    }
+
     printf("\n");
 }
 
@@ -102,6 +117,7 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
     //  3b: x^2 ("x" "^" <dużo>
     //  3c: 2137x^2 (<dużo> "x" "^" <dużo>
 
+    skip_spaces();
     int c = getchar();
     if (c == '1') {
         *wspolczynnik = 1;
@@ -125,15 +141,18 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
         }
         *wykladnik = 0;
 
+        skip_spaces();
         c = getchar();
         if (c == 'x') {
             if (*wspolczynnik == 0) {
                 *wspolczynnik = 1;
             }
 
+            skip_spaces();
             *wykladnik = 1;
             c = getchar();
             if (c == '^') {
+                skip_spaces();
                 const int wykl = parse_duzo();
                 if (wykl != -1) {
                     *wykladnik = wykl;
@@ -181,8 +200,11 @@ void parse_wielomian(int *wielomian) {
         wielomian[wykladnik] = znak_pierwszego_jednomianu * wspolczynnik;
         LOG_FN("sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
 
+        skip_spaces();
+
         int op;
         while ((op = parse_operacja()) != -1) {
+            skip_spaces();
             parse_jednomian(&wspolczynnik, &wykladnik);
             if (op == '-') {
                 wspolczynnik = -wspolczynnik;
@@ -191,14 +213,6 @@ void parse_wielomian(int *wielomian) {
             LOG_FN("sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
         }
     }
-}
-
-void skip_spaces() {
-    int c = getchar();
-    while (c == ' ') {
-        c = getchar(); // pomijamy spacje pomiędzy pierwszym znakiem (znakiem operacji) a początkiem wielomianu
-    }
-    ungetc(c, stdin); // ostatnio wczytany znak nie był spacją, a więc zwróćmy go
 }
 
 void wielomian_dodaj(int akumulator[], const int nowy[]) {
@@ -257,6 +271,7 @@ int main() {
 
     while (!koniec_wszystkiego) {
         int op = -1; // 1 = dodawanie, 2 = mnożenie, 3 = koniec
+        skip_spaces();
         const int c = getchar();
         int wielomian[MAX_DEGREE + 1] = {0};
         if (c == '+') {
