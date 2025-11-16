@@ -199,15 +199,13 @@ void wielomian_dodaj(int akumulator[], int nowy[]) {
     }
 }
 
-void wielomian_pomnoz(int akumulator[], int nowy[]) {
-    int akumulator_new[MAX_DEGREE + 1] = {0};
-    for (int i = 0; i < MAX_DEGREE + 1; i++) {
-        // akumulator_new[i] = akumulator[i];
-    }
+void wielomian_pomnoz(int output[], int akumulator[], int nowy[]) {
+    int delta[MAX_DEGREE + 1] = {0};
 
     for (int i = MAX_DEGREE; i >= 0; i--) {
         if (akumulator[i] != 0) {
             int tymczasowy[MAX_DEGREE + 1] = {0};
+            printf("---> START\n");
             for (int j = MAX_DEGREE; j >= 0; j--) {
                 if (nowy[j] != 0) {
                     const int stopien = i + j;
@@ -216,23 +214,21 @@ void wielomian_pomnoz(int akumulator[], int nowy[]) {
                     tymczasowy[stopien] = wspolczynnik;
                 }
             }
-            printf("---> START\n");
             printf("akumulator_new: \n");
-            wielomian_drukuj(akumulator_new);
+            wielomian_drukuj(delta);
             printf("tymczasowy:\n");
             wielomian_drukuj(tymczasowy);
-            wielomian_dodaj(akumulator_new, tymczasowy);
+            wielomian_dodaj(delta, tymczasowy);
             printf("po dodaniu ich obu:\n");
-            wielomian_drukuj(akumulator_new);
+            wielomian_drukuj(delta);
             printf("---> END\n");
         }
     }
 
-    wielomian_dodaj(akumulator, akumulator_new);
+    wielomian_dodaj(akumulator, delta);
     for (int i = 0; i < MAX_DEGREE + 1; i++) {
-        akumulator[i] = akumulator_new[i];
+        output[i] = delta[i];
     }
-    // wielomian_dodaj(akumulator, akumulator_new);
 }
 
 #define OP_DODAWANIE 1
