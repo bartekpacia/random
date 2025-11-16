@@ -35,9 +35,25 @@ void wielomian_drukuj(int wielomian[]) {
             if (i == 0) {
                 printf("%d", wielomian[i]);
             } else if (i == 1) {
-                printf("%dx", wielomian[i]);
+                if (wielomian[i] == -1) {
+                    printf("-x");
+                }
+                else if (wielomian[i] == 1) {
+                    printf("x");
+                } else {
+                    printf("%dx", wielomian[i]);
+                }
             } else {
-                printf("%dx^%d", wielomian[i], i);
+                if (wielomian[i] == -1) {
+                    printf("-x^%d", i);
+                }
+                else if (wielomian[i] == 1) {
+                    printf("x^%d", i);
+                } else {
+                    printf("%dx^%d", wielomian[i], i);
+                }
+
+
             }
             if (i > lowest_index_with_nonzero_wspolczynnik) {
                 printf(" + ");
