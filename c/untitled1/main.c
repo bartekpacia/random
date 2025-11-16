@@ -20,44 +20,41 @@ void skip_spaces() {
     ungetc(c, stdin); // ostatnio wczytany znak nie był spacją, a więc zwróćmy go
 }
 
-void wielomian_drukuj(int wielomian[]) {
-    int lowest_index_with_nonzero_wspolczynnik = MAX_DEGREE;
-    for (int i = MAX_DEGREE; i >= 0; i--) {
-        if (wielomian[i] != 0) {
-            lowest_index_with_nonzero_wspolczynnik = i;
-        }
-    }
-
+void wielomian_drukuj(const int wielomian[]) {
+    bool poczatek = true;
     bool wszystko_zerowe = true;
-    for (int i = MAX_DEGREE; i >= 0; i--) {
-        if (wielomian[i] != 0) {
-            wszystko_zerowe = false;
-            if (i == 0) {
-                printf("%d", wielomian[i]);
-            } else if (i == 1) {
-                if (wielomian[i] == -1) {
-                    printf("-x");
+    for (int wykladnik = MAX_DEGREE; wykladnik >= 0; wykladnik--) {
+        int wspolczynnik = wielomian[wykladnik];
+        if (wspolczynnik != 0) {
+            if (!poczatek) {
+                if (wspolczynnik < 0) {
+                    printf(" - ");
+                } else {
+                    printf(" + ");
                 }
-                else if (wielomian[i] == 1) {
+            }
+
+            if (poczatek && wspolczynnik < 0) {
+                printf("-");
+            }
+
+            wszystko_zerowe = false;
+            if (wykladnik == 0) {
+                printf("%d", abs(wspolczynnik));
+            } else if (wykladnik == 1) {
+                if (wspolczynnik == -1 || wspolczynnik == 1) {
                     printf("x");
                 } else {
-                    printf("%dx", wielomian[i]);
+                    printf("%dx", abs(wspolczynnik));
                 }
             } else {
-                if (wielomian[i] == -1) {
-                    printf("-x^%d", i);
-                }
-                else if (wielomian[i] == 1) {
-                    printf("x^%d", i);
+                if (wspolczynnik == -1 || wspolczynnik == 1) {
+                    printf("x^%d", wykladnik);
                 } else {
-                    printf("%dx^%d", wielomian[i], i);
+                    printf("%dx^%d", abs(wspolczynnik), wykladnik);
                 }
-
-
             }
-            if (i > lowest_index_with_nonzero_wspolczynnik) {
-                printf(" + ");
-            }
+            poczatek = false;
         }
     }
 
