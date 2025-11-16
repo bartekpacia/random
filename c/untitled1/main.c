@@ -76,6 +76,7 @@ int parse_duzo() {
     } else {
         int cyfra = parse_cyfra_od_2_do_9(c);
         if (cyfra == -1) {
+            LOG_FN("nie udało się sparsowac cyfra_od_2_do_9 bo jest: ASCII: %c, DEC: %d\n", c, c);
             liczba = -1;
             ungetc(c, stdin);
         } else {
@@ -152,7 +153,7 @@ int parse_operacja() {
         op = -1;
         ungetc(c, stdin);
     }
-    LOG_FN("%c\n", op);
+    LOG_FN("ASCII: %c, DEC: %d\n", op, op);
     return op;
 }
 
@@ -196,40 +197,45 @@ void skip_spaces() {
 }
 
 void wielomian_dodaj(int akumulator[], const int nowy[]) {
+    LOG_FN("START\n");
     for (int i = 0; i <= MAX_DEGREE; i++) {
         akumulator[i] += nowy[i];
     }
 }
 
-void wielomian_pomnoz(int output[], int akumulator[], int nowy[]) {
-    int delta[MAX_DEGREE + 1] = {0};
+void wielomian_pomnoz(int output[], const int akumulator[], const int nowy[]) {
+    int rezultat[MAX_DEGREE + 1] = {0};
 
     for (int i = MAX_DEGREE; i >= 0; i--) {
         if (akumulator[i] != 0) {
             int tymczasowy[MAX_DEGREE + 1] = {0};
-            LOG("---> START\n");
+            LOG_FN("---> START\n");
             for (int j = MAX_DEGREE; j >= 0; j--) {
                 if (nowy[j] != 0) {
                     const int stopien = i + j;
                     const int wspolczynnik = akumulator[i] * nowy[j];
-                    LOG("mnożymy: %dx^%d * %dx^%d = %dx^%d\n", akumulator[i], i, nowy[j], j, wspolczynnik, stopien);
+                    LOG_FN("mnożymy: %dx^%d * %dx^%d = %dx^%d\n", akumulator[i], i, nowy[j], j, wspolczynnik, stopien);
                     tymczasowy[stopien] = wspolczynnik;
                 }
             }
-            LOG("akumulator_new: \n");
-            // wielomian_drukuj(delta);
-            LOG("tymczasowy:\n");
-            // wielomian_drukuj(tymczasowy);
-            wielomian_dodaj(delta, tymczasowy);
-            LOG("po dodaniu ich obu:\n");
-            // wielomian_drukuj(delta);
-            LOG("---> END\n");
+#ifdef DEBUG
+            LOG_FN("przed dodawaniem. rezultat: \n");
+            wielomian_drukuj(rezultat);
+            LOG_FN("przed dodawaniem. tymczasowy:\n");
+            wielomian_drukuj(tymczasowy);
+#endif
+            wielomian_dodaj(rezultat, tymczasowy);
+#ifdef DEBUG
+            LOG_FN("po dodawaniu. rezultat + tymczasowy:\n");
+            wielomian_drukuj(rezultat);
+            LOG_FN("---> END\n");
+#endif
         }
     }
 
-    wielomian_dodaj(akumulator, delta);
+    // wielomian_dodaj(akumulator, rezultat);
     for (int i = 0; i < MAX_DEGREE + 1; i++) {
-        output[i] = delta[i];
+        output[i] = rezultat[i];
     }
 }
 
@@ -272,12 +278,15 @@ int main() {
         } else if (op == OP_MNOZENIE) {
             int rezultat_mnozenia[MAX_DEGREE + 1] = {0};
             wielomian_pomnoz(rezultat_mnozenia, akumulator, wielomian);
-            wielomian_dodaj(akumulator, rezultat_mnozenia);
+            for (int i = 0; i < MAX_DEGREE + 1; i++) {
+                akumulator[i] = rezultat_mnozenia[i];
+            }
         } else if (op == OP_KONIEC) {
             koniec_wszystkiego = true;
         }
 
         if (!koniec_wszystkiego && op != OP_NEWLINE) {
+            LOG_FN("wielomian: ");
             wielomian_drukuj(akumulator);
         }
     }
