@@ -11,6 +11,13 @@
 #endif
 
 void wielomian_drukuj(int wielomian[]) {
+    int lowest_index_with_nonzero_wspolczynnik = MAX_DEGREE;
+    for (int i = MAX_DEGREE; i >= 0; i--) {
+        if (wielomian[i] != 0) {
+            lowest_index_with_nonzero_wspolczynnik = i;
+        }
+    }
+
     for (int i = MAX_DEGREE; i >= 0; i--) {
         if (wielomian[i] != 0) {
             if (i == 0) {
@@ -20,7 +27,7 @@ void wielomian_drukuj(int wielomian[]) {
             } else {
                 printf("%dx^%d", wielomian[i], i);
             }
-            if (i > 0 && wielomian[i - 1] != 0) {
+            if (i > lowest_index_with_nonzero_wspolczynnik) {
                 printf(" + ");
             }
         }
