@@ -74,6 +74,7 @@ int parse_cyfra_od_2_do_9(int c) {
 }
 
 int parse_cyfra() {
+    LOG_FN("start\n");
     int cyfra;
     const int c = getchar();
     if (c == '0') {
@@ -131,51 +132,33 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
     //  3c: 2137x^2 (<dużo> "x" "^" <dużo>
 
     skip_spaces();
+    const int duzo = parse_duzo();
+    if (duzo != -1) {
+        *wspolczynnik = duzo;
+    }
+    *wykladnik = 0;
+
+    skip_spaces();
     int c = getchar();
-    if (c == '1') {
-        *wspolczynnik = 1;
-        *wykladnik = 0;
-
-        int duzo = parse_duzo();
-        if (duzo != -1) {
-            *wspolczynnik *= 10;
-            *wspolczynnik += duzo;
+    if (c == 'x') {
+        if (*wspolczynnik == 0) {
+            *wspolczynnik = 1;
         }
-
-        while ((duzo = parse_duzo()) != -1) {
-            *wspolczynnik *= 10;
-            *wspolczynnik += duzo;
-        }
-    } else {
-        ungetc(c, stdin);
-        const int duzo = parse_duzo();
-        if (duzo != -1) {
-            *wspolczynnik = duzo;
-        }
-        *wykladnik = 0;
 
         skip_spaces();
+        *wykladnik = 1;
         c = getchar();
-        if (c == 'x') {
-            if (*wspolczynnik == 0) {
-                *wspolczynnik = 1;
-            }
-
+        if (c == '^') {
             skip_spaces();
-            *wykladnik = 1;
-            c = getchar();
-            if (c == '^') {
-                skip_spaces();
-                const int wykl = parse_duzo();
-                if (wykl != -1) {
-                    *wykladnik = wykl;
-                }
-            } else {
-                ungetc(c, stdin);
+            const int wykl = parse_duzo();
+            if (wykl != -1) {
+                *wykladnik = wykl;
             }
         } else {
             ungetc(c, stdin);
         }
+    } else {
+        ungetc(c, stdin);
     }
 }
 
