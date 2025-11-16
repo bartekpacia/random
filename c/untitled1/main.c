@@ -197,21 +197,40 @@ void wielomian_dodaj(int akumulator[], int nowy[]) {
     for (int i = 0; i <= MAX_DEGREE; i++) {
         akumulator[i] += nowy[i];
     }
-    printf("wielomian_dodaj: akumulator: ");
-    wielomian_drukuj(akumulator);
 }
 
 void wielomian_pomnoz(int akumulator[], int nowy[]) {
-    for (int i = 0; i <= MAX_DEGREE; i++) {
-        if (nowy[i] != 0) {
+    int akumulator_new[MAX_DEGREE + 1] = {0};
+    for (int i = 0; i < MAX_DEGREE + 1; i++) {
+        akumulator_new[i] = akumulator[i];
+    }
+
+    for (int i = MAX_DEGREE; i >= 0; i--) {
+        if (akumulator[i] != 0) {
             int tymczasowy[MAX_DEGREE + 1] = {0};
-            for (int j = 0; j <= MAX_DEGREE; j++) {
-                int stopien = i + j;
-                int wspolczynnik = nowy[i] * akumulator[j];
-                tymczasowy[stopien] = wspolczynnik;
+            for (int j = MAX_DEGREE; j >= 0; j--) {
+                if (nowy[j] != 0) {
+                    const int stopien = i + j;
+                    const int wspolczynnik = akumulator[j] * nowy[j];
+                    printf("mnożymy: %dx^%d * %dx^%d\n", akumulator[i], i, nowy[j], j);
+                    tymczasowy[stopien] = wspolczynnik;
+                }
             }
-            wielomian_dodaj(akumulator, tymczasowy);
+            printf("---> START\n");
+            printf("akumulator_new: \n");
+            wielomian_drukuj(akumulator_new);
+            printf("tymczasowy:\n");
+            wielomian_drukuj(tymczasowy);
+            wielomian_dodaj(akumulator_new, tymczasowy);
+            printf("po dodaniu ich obu:\n");
+            wielomian_drukuj(akumulator_new);
+            printf("---> END\n");
         }
+    }
+
+    // wielomian_dodaj(akumulator, akumulator_new);
+    for (int i = 0; i < MAX_DEGREE + 1; i++) {
+        akumulator[i] = akumulator_new[i];
     }
 }
 
