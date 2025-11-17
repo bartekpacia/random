@@ -5,9 +5,11 @@ if command -v delta >/dev/null 2>&1; then
   DIFF="delta"
 fi
 
+test_dir="${1:-examples}"
+
 total=0
 passed=0
-for file_in in examples/*.in; do
+for file_in in $(find "$test_dir" -name '*.in' -type f); do
     base_name="${file_in%.in}"
     file_out="${base_name}.out"
     GREEN='\033[0;32m'
