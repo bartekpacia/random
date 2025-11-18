@@ -207,6 +207,7 @@ void parse_wielomian(int *wielomian) {
             }
             wielomian[wykladnik] = wspolczynnik;
             LOG_FN("sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
+            skip_spaces();
         }
     }
 }
