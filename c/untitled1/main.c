@@ -12,7 +12,7 @@
 #define LOG_FN(...) ((void)0)
 #endif
 
-void skip_spaces() {
+void pomin_spacje() {
     int c = getchar();
     while (c == ' ') {
         c = getchar(); // pomijamy spacje pomiędzy pierwszym znakiem (znakiem operacji) a początkiem wielomianu
@@ -131,25 +131,25 @@ void parse_jednomian(int *wspolczynnik, int *wykladnik) {
     //  3b: x^2 ("x" "^" <dużo>
     //  3c: 2137x^2 (<dużo> "x" "^" <dużo>
 
-    skip_spaces();
+    pomin_spacje();
     const int duzo = parse_duzo();
     if (duzo != -1) {
         *wspolczynnik = duzo;
     }
     *wykladnik = 0;
 
-    skip_spaces();
+    pomin_spacje();
     int c = getchar();
     if (c == 'x') {
         if (*wspolczynnik == 0) {
             *wspolczynnik = 1;
         }
 
-        skip_spaces();
+        pomin_spacje();
         *wykladnik = 1;
         c = getchar();
         if (c == '^') {
-            skip_spaces();
+            pomin_spacje();
             const int wykl = parse_duzo();
             if (wykl != -1) {
                 *wykladnik = wykl;
@@ -196,18 +196,18 @@ void parse_wielomian(int *wielomian) {
         wielomian[wykladnik] = znak_pierwszego_jednomianu * wspolczynnik;
         LOG_FN("sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
 
-        skip_spaces();
+        pomin_spacje();
 
         int op;
         while ((op = parse_operacja()) != -1) {
-            skip_spaces();
+            pomin_spacje();
             parse_jednomian(&wspolczynnik, &wykladnik);
             if (op == '-') {
                 wspolczynnik = -wspolczynnik;
             }
             wielomian[wykladnik] = wspolczynnik;
             LOG_FN("sparsowano jednomian %dx^%d\n", wspolczynnik, wykladnik);
-            skip_spaces();
+            pomin_spacje();
         }
     }
 }
@@ -268,16 +268,16 @@ int main() {
 
     while (!koniec_wszystkiego) {
         int op = -1; // 1 = dodawanie, 2 = mnożenie, 3 = koniec
-        skip_spaces();
+        pomin_spacje();
         const int c = getchar();
         int wielomian[MAX_DEGREE + 1] = {0};
         if (c == '+') {
             op = OP_DODAWANIE;
-            skip_spaces();
+            pomin_spacje();
             parse_wielomian(wielomian);
         } else if (c == '*') {
             op = OP_MNOZENIE;
-            skip_spaces();
+            pomin_spacje();
             parse_wielomian(wielomian);
         } else if (c == '.') {
             op = OP_KONIEC;
