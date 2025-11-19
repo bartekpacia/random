@@ -12,6 +12,10 @@ public class Person {
         this.name = name;
         this.age = age;
         int a = "xd" + 10;
+
+        for (int i = 0; true; i++) {
+            System.out.println(i);
+        }
     }
 
     void bar(List<String> x) {
