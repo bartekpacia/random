@@ -1,7 +1,6 @@
 package records5;
 
 import java.util.Objects;
-import java.util.List;
 
-public class Main {
+public class Second {
 }
