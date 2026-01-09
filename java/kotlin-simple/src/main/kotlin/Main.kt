@@ -8,3 +8,11 @@ fun main() {
         println("i = $i")
     }
 }
+
+interface Animal {
+    fun makeSound(): String
+}
+
+class Elephant : Animal {
+    override fun makeSound(): String = "Trumpet!"
+}
