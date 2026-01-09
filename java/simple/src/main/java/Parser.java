@@ -1,64 +1,50 @@
-public class Parser {
-    int[] digits;
-    int index = 0;
+void main() {
+    Solution s = new Solution();
+    ListNode c = new ListNode(3, null);
+    ListNode b = new ListNode(2, c);
+    ListNode a = new ListNode(1, b);
 
-    public static void main(String[] args) {
-        new Parser(new int[]{1, 2, 3}).parse();
-        new Parser(new int[]{1, 0, 1}).parse();
-        new Parser(new int[]{1, 0, 2}).parse();
-        new Parser(new int[]{3, 2, 4}).parse();
+    System.out.println(a);
+
+    ListNode newList = s.reverseList(a);
+
+    System.out.println(newList);
+    System.out.println("first: " + newList.val);
+    System.out.println("second: " + newList.next.val);
+    System.out.println("third: " + newList.next.next.val);
+}
+
+public static class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
     }
 
-    Parser(int[] digits) {
-        this.digits = digits;
+    @Override
+    public String toString() {
+        return "ListNode[" + "val = " + val + ", next = " + (next != null ? next.toString() : null) + ']';
     }
+}
 
-    void parse() {
-        boolean ok = parseS();
-        if (!ok) {
-            System.out.println("NIE, podana tablica nie tworzy słowa w danym języku");
-        } else {
-            System.out.println("TAK, podana tablica tworzy słowo w danym języku");
-        }
-    }
+class Solution {
+    public ListNode reverseList(final ListNode originalHead) {
+        if (originalHead == null) return null;
+        if (originalHead.next == null) return originalHead;
 
-    boolean parseS() {
-        if (index >= digits.length) {
-            return true;
-        }
+        ListNode current = originalHead.next;
+        originalHead.next = null;
 
-        int nextDigit = digits[index];
-        if (nextDigit == 1 || nextDigit == 2 || nextDigit == 3) {
-            index++;
-            return parseS();
+        ListNode previous = originalHead;
+        while (current != null) {
+            ListNode newCurrent = current.next;
+            current.next = previous;
+            previous = current;
+            current = newCurrent;
         }
 
-        if (nextDigit == 0) {
-            index++;
-            return parseB();
-        }
-
-        return false;
-        // throw new RuntimeException("should never get here");
-    }
-
-    boolean parseB() {
-        if (index >= digits.length) {
-            return false;
-        }
-
-        int nextDigit = digits[index];
-
-        if (nextDigit == 2 || nextDigit == 3) {
-            index++;
-            return parseB();
-        }
-
-        if (nextDigit == 1) {
-            index++;
-            return parseS();
-        }
-
-        return false;
+        return previous;
     }
 }
