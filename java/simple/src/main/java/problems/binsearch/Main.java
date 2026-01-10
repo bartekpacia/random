@@ -1,6 +1,7 @@
-package algo;
+package problems.binsearch;
 
 import java.util.Arrays;
+import java.util.function.Function;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,6 +48,9 @@ public class Main {
 
         int steps = 0;
         int answer = -1;
+
+        Function<String, Integer> f = Integer::parseInt;
+
         while (i <= j) {
             steps++;
             int mid = (i + j) / 2;
