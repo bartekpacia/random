@@ -9,8 +9,6 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("hello world! args = " + Arrays.toString(args));
-
         if (args.length < 2) {
             System.err.println("invalid arguments. Usage: ./indexer <command> <file> <word>");
             System.exit(1);
@@ -25,7 +23,7 @@ public class Main {
         }
 
         // commands = search-dumb / build-index / search-index
-        String searchWord = args[2].toLowerCase(Locale.ROOT);
+        String searchWord = args[3].toLowerCase(Locale.ROOT);
         switch (command) {
             case "search-dumb": {
 
@@ -37,7 +35,8 @@ public class Main {
                         int offset = 0;
                         while ((offset = line.toLowerCase(Locale.ROOT).indexOf(searchWord, offset)) != -1) {
                             offset++; // let's start from 1, not from 0
-                            System.out.println("found occurrence " + occurrence + " at " + lineNumber + ":" + offset);
+                            Position position = new Position(path, lineNumber, offset);
+                            System.out.println(position);
                             //System.out.println("found occurrence " + occurrence + " in " + path + "@" + lineNumber + ":" + offset);
                             occurrence++;
                             offset++;
@@ -58,7 +57,6 @@ public class Main {
                 try (BufferedReader reader = Files.newBufferedReader(path)) {
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        System.out.println("reading line " + lineNumber);
                         int i = 0;
                         int n = line.length();
                         while (i < n) {
@@ -70,7 +68,7 @@ public class Main {
                                 i++;
                             }
                             if (start < i) {
-                                String key = line.substring(start, i);
+                                String key = line.substring(start, i).toLowerCase();
                                 Position position = new Position(path, lineNumber, start);
                                 index.computeIfAbsent(key, (k) -> new ArrayList<>()).add(position);
                             }
