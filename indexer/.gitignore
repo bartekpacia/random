@@ -41,3 +41,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Custom, added by me
+
+.idea/
+data/pride_and_prejudice*

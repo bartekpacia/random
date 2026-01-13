@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+curl -L https://www.gutenberg.org/files/1342/1342-0.txt -o data/pride_and_prejudice.txt
+
+for _ in $(seq 100); do cat data/pride_and_prejudice.txt; done >data/pride_and_prejudice_x100.txt

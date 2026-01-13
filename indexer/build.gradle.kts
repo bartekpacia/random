@@ -1,9 +1,14 @@
 plugins {
-    id("java")
+    java
+    application
 }
 
 group = "tech.pacia"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass = "tech.pacia.indexer.Main"
+}
 
 repositories {
     mavenCentral()
