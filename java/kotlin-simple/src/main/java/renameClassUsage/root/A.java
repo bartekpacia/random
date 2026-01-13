@@ -2,22 +2,22 @@
 package root;
 
 public class A {
-    public Bruh() {
+    public A() {
     }
 
     public final int x = 1;
 
-    public static void sf() {
+    public void f() {
 
     }
 
-    public void s() {
+    public static void s() {
     }
 
 
     public String c() {
         System.out.println(x);
-        sf();
+        f();
         f();
         return null;
     }
@@ -26,7 +26,7 @@ public class A {
     class Inner {
         void f() {
             System.out.println(A.this.x);
-            System.out.println(A.sf());
+            System.out.println(A.s());
             System.out.println(A.this.f());
         }
     }

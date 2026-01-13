@@ -2,22 +2,28 @@ interface Animal {
     String makeSound();
 }
 
-abstract class Mammal implements Animal {
+class Dog implements Animal {
 
-}
-
-class Elephant extends Mammal implements Animal {
     @Override
     public String makeSound() {
-        JavaClass javClass = new JavaClass();
-        Animal a = () -> "xd";
-        return "Trumpet!";
+        return "woof woof";
     }
 }
 
-class Dodo extends Mammal implements Animal {
-    @Override
-    public String makeSound() {
-        return "???";
+public class Main {
+    static void main(String[] args) {
+        new Object() {
+            void foo() {
+                class Fish implements Animal {
+                    @Override
+                    public String makeSound() {
+                        return "<no idea what sound a fish makes>";
+                    }
+                }
+
+                Animal b = () -> "meow meow";
+                b.makeSound();
+            }
+        };
     }
 }

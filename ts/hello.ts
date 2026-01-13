@@ -9,6 +9,8 @@ abstract class Mammal implements Animal {
 class Elephant extends Mammal implements Animal {
     makeSound(): string {
         const a: Animal = { makeSound: () => "xd" };
+        a.makeSound();
+        a.makeSound();
         return "Trumpet!";
     }
 }
