@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public class Main {
@@ -92,11 +93,12 @@ public class Main {
     }
 
     private static Map<String, List<Position>> buildIndex(Path rootPath) throws IOException {
-        Map<String, List<Position>> index = new HashMap<>();
+        Map<String, List<Position>> index = new ConcurrentHashMap<>();
         Set<Character> ignored = Set.of(' ', '.', ',', ';', '“', '”', '\n');
         long totalStartMillis = System.currentTimeMillis();
         try (Stream<Path> stream = Files.walk(rootPath)) {
-            stream.filter(Files::isRegularFile)
+            stream.parallel()
+                    .filter(Files::isRegularFile)
                     .filter(p -> {
                         String filename = p.getFileName().toString();
                         return filename.endsWith(".txt") || filename.endsWith(".md");
