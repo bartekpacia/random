@@ -2,6 +2,7 @@ package tech.pacia.indexer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.StandardProtocolFamily;
 import java.net.UnixDomainSocketAddress;
 import java.nio.ByteBuffer;
@@ -12,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Main {
     /// Will be `/tmp/indexer.sock` on Unix/macOS.
@@ -41,7 +43,11 @@ public class Main {
             case "build-index": {
                 Path path = Paths.get(args[1]);
                 if (!Files.exists(path)) {
-                    System.err.println("file does not exist: " + path);
+                    System.err.println("directory does not exist: " + path);
+                    System.exit(1);
+                }
+                if (!Files.isDirectory(path)) {
+                    System.err.println("is not a directory: " + path);
                     System.exit(1);
                 }
 
@@ -85,37 +91,47 @@ public class Main {
         }
     }
 
-    private static Map<String, List<Position>> buildIndex(Path path) throws IOException {
+    private static Map<String, List<Position>> buildIndex(Path rootPath) throws IOException {
         Map<String, List<Position>> index = new HashMap<>();
         Set<Character> ignored = Set.of(' ', '.', ',', ';', '“', '”', '\n');
-        int lineNumber = 0;
-        long startMillis = System.currentTimeMillis();
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                int i = 0;
-                int n = line.length();
-                while (i < n) {
-                    while (i < n && ignored.contains(line.charAt(i))) {
-                        i++;
-                    }
-                    int start = i;
-                    while (i < n && !ignored.contains(line.charAt(i))) {
-                        i++;
-                    }
-                    if (start < i) {
-                        String key = line.substring(start, i).toLowerCase();
-                        Position position = new Position(path, lineNumber, start);
-                        index.computeIfAbsent(key, (k) -> new ArrayList<>()).add(position);
-                    }
-                }
+        long totalStartMillis = System.currentTimeMillis();
+        try (Stream<Path> stream = Files.walk(rootPath)) {
+            stream.filter(Files::isRegularFile)
+                    .filter(p -> {
+                        String filename = p.getFileName().toString();
+                        return filename.endsWith(".txt") || filename.endsWith(".md");
+                    })
+                    .forEach(path -> {
+                        int lineNumber = 0;
+                        try (BufferedReader reader = Files.newBufferedReader(path)) {
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                int i = 0;
+                                int n = line.length();
+                                while (i < n) {
+                                    while (i < n && ignored.contains(line.charAt(i))) {
+                                        i++;
+                                    }
+                                    int start = i;
+                                    while (i < n && !ignored.contains(line.charAt(i))) {
+                                        i++;
+                                    }
+                                    if (start < i) {
+                                        String key = line.substring(start, i).toLowerCase();
+                                        Position position = new Position(path, lineNumber + 1, start + 1);
+                                        index.computeIfAbsent(key, (_) -> new ArrayList<>()).add(position);
+                                    }
+                                }
+                                lineNumber++;
+                            }
+                        } catch (IOException e) {
+                            throw new UncheckedIOException(e);
+                        }
 
-                lineNumber++;
-            }
+                    });
         }
-
-        long duration = System.currentTimeMillis() - startMillis;
-        System.out.println("built index (" + index.size() + " keys) in " + duration + " ms");
+        long totalDuration = System.currentTimeMillis() - totalStartMillis;
+        System.out.println("built index (" + index.size() + " keys) in " + totalDuration + " ms");
 
         return index;
     }
@@ -194,6 +210,6 @@ public class Main {
 record Position(Path path, int line, int offset) {
     @Override
     public String toString() {
-        return /*path + "@" +*/ line + ":" + offset;
+        return path + "@" + line + ":" + offset;
     }
 }
