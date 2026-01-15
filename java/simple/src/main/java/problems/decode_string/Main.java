@@ -1,5 +1,8 @@
 package problems.decode_string;
 
+// Encode and Decode Strings: https://neetcode.io/problems/string-encode-and-decode
+// Decode String: https://leetcode.com/problems/decode-string
+
 public class Main {
     public static void main(String[] args) {
         Solution solution = new Solution();
