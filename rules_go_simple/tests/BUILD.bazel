@@ -1,0 +1,9 @@
+load("//:def.bzl", "go_binary")
+
+go_binary(
+    name = "hello",
+    srcs = [
+        "main.go",
+        "message.go",
+    ],
+)
