@@ -1,0 +1,23 @@
+what are /dev/kvm, Intel VT-X, 
+
+what devices does a virtual machine need?
+
+minimal bootable:
+- cpu (provided by KVM)
+- memory (provided by KVM, guest kernel is loaded into it)
+- interrupt controller + timer (emulated by firecracker)
+- serial console (uart)
+- disk (with a filesystem in it) --> virtio-blk
+
+sensible additions:
+- network interface -> virtio-net (TAP device is the host end)
+- socket -> virtio-vsock
+
+not in firecracker:
+- graphics card -> virtio-gpu
+
+--- why is only cpu and memory provided by KVM?
+cpu has to be put in guest mode, which can only run from kernel mode
+memory -- needs page tables and interrupts, which also needs kernel mode
+
+the rest of device emulation doesn't need to happen inside the kernel
